@@ -25,8 +25,7 @@ def make_git_repo(tmp_path: Path) -> Path:
 # ---------------------------------------------------------------------------
 
 def run_init(tmp_path: Path, *extra_args: str) -> tuple[int, str, str]:
-    # Typer 0.24+ flattens single-command apps: no subcommand name needed.
-    result = runner.invoke(app, ["--cwd", str(tmp_path), *extra_args])
+    result = runner.invoke(app, ["init", "--cwd", str(tmp_path), *extra_args])
     return result.exit_code, result.output, ""
 
 

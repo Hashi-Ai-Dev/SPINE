@@ -1,0 +1,11 @@
+[sandbox]
+type = "workspace-write"
+
+[approvals]
+mode = "on-request"
+
+[worktrees]
+enabled = true
+
+[guidance]
+file = "AGENTS.md"

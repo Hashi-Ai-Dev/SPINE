@@ -1,0 +1,252 @@
+"""
+InitService: pure business logic for spine init.
+
+No Rich output here. Returns a structured result that the CLI renders.
+This makes the service independently testable without mocking terminal I/O.
+"""
+
+from __future__ import annotations
+
+from dataclasses import dataclass, field
+from pathlib import Path
+
+from spine import constants as C
+from spine.models import MissionModel, ConstraintsModel
+from spine.utils.io import write_file_safe, ensure_dir, touch_file
+from spine.utils.jsonl import ensure_jsonl
+from spine.utils.paths import find_git_root, GitRepoNotFoundError
+
+
+@dataclass
+class InitResult:
+    """Structured result returned by InitService.run()."""
+    created: list[str] = field(default_factory=list)
+    skipped: list[str] = field(default_factory=list)
+    conflicts: list[str] = field(default_factory=list)
+    repo_root: Path | None = None
+
+
+class ConflictError(Exception):
+    """Raised when existing files block init and --force was not given."""
+    def __init__(self, conflicts: list[str]) -> None:
+        self.conflicts = conflicts
+        super().__init__(f"Conflicting files: {conflicts}")
+
+
+class InitService:
+    def __init__(
+        self,
+        *,
+        force: bool = False,
+        allow_no_git: bool = False,
+        cwd: Path | None = None,
+    ) -> None:
+        self.force = force
+        self.allow_no_git = allow_no_git
+        self.cwd = cwd or Path.cwd()
+
+    # ------------------------------------------------------------------
+    # Public entry point
+    # ------------------------------------------------------------------
+
+    def run(self) -> InitResult:
+        result = InitResult()
+
+        # Step 1: Resolve repo root
+        try:
+            repo_root = find_git_root(self.cwd)
+        except GitRepoNotFoundError:
+            if self.allow_no_git:
+                repo_root = self.cwd.resolve()
+            else:
+                raise  # CLI maps to exit code 2
+
+        result.repo_root = repo_root
+        spine = repo_root / C.SPINE_DIR
+
+        # Step 2: Dry-run conflict detection (before touching anything).
+        # Collect ALL conflicts first so the user sees the full list.
+        conflicts = self._detect_conflicts(repo_root, spine)
+        if conflicts and not self.force:
+            result.conflicts = conflicts
+            raise ConflictError(conflicts)
+
+        # Step 3: Create .spine/ directory
+        ensure_dir(spine)
+
+        # Step 4: YAML files
+        self._create_or_skip(result, spine / C.MISSION_FILE, MissionModel().to_yaml())
+        self._create_or_skip(result, spine / C.CONSTRAINTS_FILE, ConstraintsModel().to_yaml())
+
+        # Step 5: JSONL append logs
+        for fname in [
+            C.OPPORTUNITIES_FILE,
+            C.NOT_NOW_FILE,
+            C.EVIDENCE_FILE,
+            C.DECISIONS_FILE,
+            C.DRIFT_FILE,
+            C.RUNS_FILE,
+        ]:
+            path = spine / fname
+            created = ensure_jsonl(path, force=self.force)
+            (result.created if created else result.skipped).append(
+                str(path.relative_to(repo_root))
+            )
+
+        # Step 6: state.db placeholder (empty file, never written as SQLite)
+        db_path = spine / C.STATE_DB_FILE
+        created = touch_file(db_path, force=self.force)
+        (result.created if created else result.skipped).append(
+            str(db_path.relative_to(repo_root))
+        )
+
+        # Step 7: Subdirectories
+        for dname in [C.REVIEWS_DIR, C.BRIEFS_DIR, C.SKILLS_DIR, C.CHECKS_DIR]:
+            d = spine / dname
+            already_existed = d.exists()
+            ensure_dir(d)
+            rel = str(d.relative_to(repo_root)) + "/"
+            (result.skipped if already_existed else result.created).append(rel)
+
+        # Step 8: Repo-root governance and tool config files
+        self._create_or_skip(result, repo_root / C.AGENTS_MD, _AGENTS_MD_CONTENT)
+        self._create_or_skip(result, repo_root / C.CLAUDE_MD, _CLAUDE_MD_CONTENT)
+        self._create_or_skip(
+            result, repo_root / C.CLAUDE_SETTINGS_PATH, _CLAUDE_SETTINGS_CONTENT
+        )
+        self._create_or_skip(
+            result, repo_root / C.CODEX_CONFIG_PATH, _CODEX_CONFIG_CONTENT
+        )
+
+        return result
+
+    # ------------------------------------------------------------------
+    # Private helpers
+    # ------------------------------------------------------------------
+
+    def _create_or_skip(self, result: InitResult, path: Path, content: str) -> None:
+        repo_root = result.repo_root
+        assert repo_root is not None
+        created = write_file_safe(path, content, force=self.force)
+        rel = str(path.relative_to(repo_root))
+        (result.created if created else result.skipped).append(rel)
+
+    def _detect_conflicts(self, repo_root: Path, spine: Path) -> list[str]:
+        """
+        Return list of relative paths that exist and would be overwritten.
+        Only YAML/Markdown/config files are checked — JSONL logs and state.db
+        are silently skipped because they are append-only and safe to re-init.
+        """
+        if self.force:
+            return []
+        candidates = [
+            spine / C.MISSION_FILE,
+            spine / C.CONSTRAINTS_FILE,
+            repo_root / C.AGENTS_MD,
+            repo_root / C.CLAUDE_MD,
+            repo_root / C.CLAUDE_SETTINGS_PATH,
+            repo_root / C.CODEX_CONFIG_PATH,
+        ]
+        return [
+            str(p.relative_to(repo_root))
+            for p in candidates
+            if p.exists()
+        ]
+
+
+# ============================================================
+# Template file contents
+# ============================================================
+
+_AGENTS_MD_CONTENT = """\
+# SPINE Agent Guidance
+
+This repository uses `.spine/` as canonical governance state.
+
+## Rules for all agents
+
+- Read `.spine/mission.yaml` before making non-trivial changes.
+- Read `.spine/constraints.yaml` to understand work schedule and budget limits.
+- Never silently expand scope beyond `allowed_scope` in `mission.yaml`.
+- Never add UI, auth, billing, cloud sync, or autonomous background loops unless
+  they appear explicitly in `allowed_scope`.
+- Do not create new `spine` subcommands — Phase 1 implements only `spine init`.
+- After any change session: run `uv run pytest` and fix all failures before finishing.
+
+## Phase 1 scope
+
+Only `spine init` is implemented. Do not add `spine run`, `spine review`,
+`spine status`, or any other command yet.
+
+## Running tests
+
+```
+uv run pytest
+```
+
+## Governance files
+
+| File | Purpose |
+|------|---------|
+| `.spine/mission.yaml` | Active mission definition |
+| `.spine/constraints.yaml` | Work schedule, budget, routing rules |
+| `.spine/opportunities.jsonl` | Candidate opportunities log |
+| `.spine/evidence.jsonl` | Evidence collected for review |
+| `.spine/decisions.jsonl` | Decision record |
+| `.spine/runs.jsonl` | Agent run log |
+"""
+
+_CLAUDE_MD_CONTENT = """\
+# CLAUDE.md — SPINE Phase 1
+
+## Scope constraint
+
+This is **Phase 1 only**. The only implemented command is `spine init`.
+
+## Rules
+
+- Preserve `.spine/` as the canonical source of truth for governance state.
+- Do not silently expand scope beyond what is defined in `.spine/mission.yaml`.
+- Do not add new CLI commands (`spine run`, `spine status`, `spine review`, etc.).
+- Do not add web UI, authentication, billing, or cloud sync.
+- Do not write to `.spine/state.db` as SQLite in Phase 1.
+- Run `uv run pytest` before finishing any change session. Fix all failures.
+
+## Quick reference
+
+```bash
+uv sync              # install dependencies
+uv run spine init    # bootstrap .spine/ governance state
+uv run pytest        # run tests
+```
+"""
+
+_CLAUDE_SETTINGS_CONTENT = """\
+{
+  "permissions": {
+    "allow": [
+      "Bash(uv:*)",
+      "Bash(pytest:*)",
+      "Bash(git:*)",
+      "Read(*)",
+      "Write(*)",
+      "Edit(*)"
+    ],
+    "deny": []
+  }
+}
+"""
+
+_CODEX_CONFIG_CONTENT = """\
+[sandbox]
+type = "workspace-write"
+
+[approvals]
+mode = "on-request"
+
+[worktrees]
+enabled = true
+
+[guidance]
+file = "AGENTS.md"
+"""

@@ -1,0 +1,18 @@
+version: 1
+profile_name: default
+work_schedule:
+  timezone: America/New_York
+  blocked_windows: []
+build_windows: {}
+parallel_limits:
+  max_active_missions: 1
+  max_concurrent_runs: 2
+budget:
+  monthly_usd_soft_cap: 0
+routing_preferences:
+  use_local_for: []
+  use_frontier_for: []
+behavior_rules:
+  require_plan_for_complex_tasks: true
+  block_scope_expansion_without_decision: true
+  require_evidence_for_weekly_review: true

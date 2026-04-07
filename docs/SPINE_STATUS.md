@@ -1,7 +1,7 @@
 # SPINE Status
 
 **Last updated:** 2026-04-07
-**Repo:** `Hashi-Ai-Dev/HASHI.AI-Spine`
+**Repo:** `Hashi-Ai-Dev/SPINE`
 **Agent:** SPINE Repo Manager
 
 ---
@@ -53,7 +53,7 @@ Tests now at **136** (up from 123).
 
 | Blocker | Severity | Resolution |
 |---------|----------|------------|
-| GitHub secret scanning / Dependabot not enabled | High | Human visit: `github.com/Hashi-Ai-Dev/HASHI.AI-Spine/settings/security_and_analysis` |
+| GitHub secret scanning / Dependabot not enabled | High | Human visit: `github.com/Hashi-Ai-Dev/SPINE/settings/security_and_analysis` |
 | GitHub org ruleset not created | Medium | Human or token: create org-level ruleset |
 
 ---

@@ -1,127 +1,169 @@
+<div align="center">
+
 # SPINE
 
-**Local-first, repo-native mission governor for AI-native builders.**
+**Repo-native mission governance for AI-native builders.**
 
-SPINE runs as a CLI tool inside any git repository and uses a `.spine/` directory as the canonical source of truth for governance state — version-controlled alongside your code. No daemons, no network, no model inference required.
+*Define your mission. Bound your scope. Catch drift before it ships.*
 
-## What is SPINE?
+[![Python 3.11+](https://img.shields.io/badge/python-3.11%2B-blue.svg)](https://www.python.org/)
+[![uv](https://img.shields.io/badge/built%20with-uv-blueviolet)](https://github.com/astral-sh/uv)
+[![alpha](https://img.shields.io/badge/status-alpha-orange.svg)]()
 
-SPINE helps a solo developer or small team maintain clarity about:
-- What the current mission is (and isn't)
-- What scope is allowed vs. forbidden
-- What evidence has been collected
-- What decisions have been made and why
-- Whether the project is drifting from its stated scope
+</div>
 
-All state lives in plain YAML and JSONL files in `.spine/`. Human-readable, diffable, git-native.
+---
+
+SPINE is a CLI tool that sits **above** your coding agents, not inside them. It uses a `.spine/` directory — plain YAML and JSONL, version-controlled alongside your code — as the canonical source of truth for what you're building, what's in scope, and what's been decided.
+
+No daemons. No cloud. No model calls.
+
+## Who is this for?
+
+Solo developers and small teams building with AI coding agents (Claude Code, Codex, Cursor, etc.) who want a lightweight governance layer to:
+
+- Maintain a clear, bounded mission while agents work
+- Prevent scope creep from accumulating invisibly
+- Keep an auditable log of decisions and evidence
+- Generate mission briefs that ground agent sessions
+
+SPINE is strongest today with **Claude Code** and **Codex** — it generates briefing files those tools can load automatically.
 
 ## Quickstart
 
+Requires [uv](https://github.com/astral-sh/uv).
+
 ```bash
-# Install (requires uv)
 cd /your/project
-git init  # SPINE requires a git repo
+git init          # SPINE requires a git repo
 uv run spine init
 
-# Set your mission
-uv run spine mission set --title "My Project" --status active \
-  --scope "backend,api" --forbid "ui,billing"
+# Define your mission
+uv run spine mission set \
+  --title "My Project" \
+  --status active \
+  --scope "backend,api" \
+  --forbid "ui,billing"
 
 # Generate a mission brief for Claude
 uv run spine brief --target claude
 
-# Check repo health
+# Run the governance health check
 uv run spine doctor
 ```
 
+That's it. `.spine/` is now your governance contract, version-controlled with the rest of your code.
+
 ## Current Alpha Capabilities
 
-| Command | What it does |
+| Command | Description |
 |---------|-------------|
 | `spine init` | Scaffold `.spine/` governance state in a git repo |
 | `spine mission show` | Display current mission (table or `--json`) |
 | `spine mission set` | Update mission fields |
 | `spine opportunity score` | Score an opportunity with a weighted 6-factor rubric |
-| `spine evidence add` | Log evidence (commits, PRs, test passes, demos, etc.) |
-| `spine decision add` | Log a decision record with rationale |
-| `spine drift scan` | Detect scope drift using git-native diff |
-| `spine brief --target claude\|codex` | Generate a mission brief for a specific AI agent |
-| `spine review weekly` | Generate a weekly review document |
+| `spine evidence add` | Append a typed evidence record |
+| `spine decision add` | Append a decision record with rationale |
+| `spine drift scan` | Detect scope drift using git-native diff (staged + committed) |
+| `spine brief --target claude\|codex` | Generate a mission brief for a specific agent |
+| `spine review weekly` | Aggregate evidence/decisions/drift into a weekly review |
 | `spine doctor` | Validate `.spine/` state and repo contract |
-| `spine mcp serve` | Start a local MCP server (blocking stdio mode) |
+| `spine mcp serve` | Start a local MCP server (stdio mode) |
 
 `--json` output is available on `mission show`, `doctor`, and `review weekly`.
 
-## What `spine init` creates
+## What `spine init` Creates
 
 ```
 .spine/
 ├── mission.yaml        ← Active mission definition
 ├── constraints.yaml    ← Work schedule, budget, routing rules
-├── opportunities.jsonl ← Candidate opportunities log
+├── opportunities.jsonl ← Scored opportunity log
 ├── not_now.jsonl       ← Deferred ideas
 ├── evidence.jsonl      ← Evidence log
 ├── decisions.jsonl     ← Decision record
-├── drift.jsonl         ← Drift detection log
+├── drift.jsonl         ← Drift scan results
 ├── runs.jsonl          ← Agent run log
-├── state.db            ← Placeholder (future use)
-├── reviews/            ← Generated review documents
-├── briefs/             ← Mission briefs
+├── reviews/            ← Generated weekly reviews
+├── briefs/             ← Agent mission briefs
 ├── skills/             ← Agent skill definitions
-└── checks/             ← Automated check scripts
+└── checks/             ← Automated checks
 AGENTS.md               ← Guidance for AI agents in this repo
-CLAUDE.md               ← Claude-specific rules
+CLAUDE.md               ← Claude-specific governance rules
 ```
 
 ## Governing an External Repo
 
-To run SPINE against a repo other than your current working directory:
+SPINE can govern a repo other than the one it's installed in. This is useful when running SPINE as a sidecar governance tool for a separate project.
 
 ```bash
-# One-time init
+# Initialize .spine/ in an external repo
 uv run spine init --cwd /path/to/other-repo
 
-# All subsequent commands via env var
+# Target all subsequent commands at that repo
 SPINE_ROOT=/path/to/other-repo uv run spine doctor
 SPINE_ROOT=/path/to/other-repo uv run spine mission show
+SPINE_ROOT=/path/to/other-repo uv run spine drift scan
 ```
+
+`SPINE_ROOT` binds both the canonical state directory and git operations to the same target repo.
+
+## Validation
+
+This alpha was validated against two repos before release:
+
+- **Self-governance:** Full governance loop on SPINE's own repo — mission set, evidence logged, decisions recorded, drift scanned, weekly review and agent briefs generated. Test suite: **123 passed, 0 failed**.
+- **External repo (gsn-connector):** `SPINE_ROOT` targeting verified end-to-end across all commands. Drift scan correctly read the external repo's git history. No state pollution between repos.
+
+## Known Limitations
+
+This is alpha software. Known rough edges:
+
+1. `--cwd` works only with `spine init` — all other commands use `SPINE_ROOT` for external targeting.
+2. `SPINE_ROOT` is process-global — if set in a shell profile, all commands are affected.
+3. No migration tooling yet — this is the first public release.
+4. JSONL logs are append-only — no undo or rollback.
+5. Single git repo per `.spine/` — cannot govern multiple repos from one state directory.
+6. `spine mcp serve` is a local stdio server only — no remote MCP support.
 
 ## Exit Codes
 
 | Code | Meaning |
 |------|---------|
 | 0 | Success |
-| 2 | Not in a git repo (use `--allow-no-git` to override) |
-| 3 | Conflicting existing files (use `--force` to overwrite) |
+| 2 | Not in a git repo (`--allow-no-git` to override) |
+| 3 | Conflicting existing files (`--force` to overwrite) |
 
-## Validation Summary
+## Documentation
 
-This alpha release was validated against two repos:
+**Start here:**
+- [`docs/SPINE_OFFICIAL_SPEC_v0.1.md`](docs/SPINE_OFFICIAL_SPEC_v0.1.md) — authoritative design spec
+- [`docs/SPINE_PUBLIC_ALPHA_RELEASE_NOTES_DRAFT.md`](docs/SPINE_PUBLIC_ALPHA_RELEASE_NOTES_DRAFT.md) — full release notes
+- [`docs/SPINE_ORIGIN_AND_PRODUCT_THESIS_v0.1.md`](docs/SPINE_ORIGIN_AND_PRODUCT_THESIS_v0.1.md) — product thesis and motivation
 
-- **Self-governance:** Full governance loop run on SPINE's own repo — mission set, evidence logged, drift scanned, weekly review generated, briefs produced. Test suite: **122 passed, 1 skipped** (Windows SIGINT — not a real failure).
-- **External repo (gsn-connector):** `SPINE_ROOT` targeting verified end-to-end. All commands bound correctly to the external repo; no state pollution of the operator's own `.spine/`.
+**Validation reports:**
+- [`docs/SPINE_ALPHA_SMOKE_TEST_REPORT.md`](docs/SPINE_ALPHA_SMOKE_TEST_REPORT.md) — smoke test results
+- [`docs/SPINE_v0.1.1_EXTERNAL_REPO_VALIDATION_gsn_connector.md`](docs/SPINE_v0.1.1_EXTERNAL_REPO_VALIDATION_gsn_connector.md) — external repo validation
 
-## Known Limitations
-
-1. `--cwd` only works with `spine init`. All other commands use `SPINE_ROOT` for external targeting.
-2. `SPINE_ROOT` is process-global — if it's set in your shell profile, all spine commands are affected.
-3. No upgrade/migration path yet — this is the first public alpha.
-4. No undo/rollback — JSONL logs are append-only.
-5. Single git repo per `.spine/` — cannot govern multiple repos from one state directory.
+See [`docs/README.md`](docs/README.md) for the full documentation index.
 
 ## What's Next
 
-- `--cwd` support on all commands (not just `spine init`)
-- Richer drift detection (semantic, not just git diff)
-- Improved review summaries
-- Migration tooling for state upgrades
+Near-term direction:
 
-Not planned for this release: dashboard UI, auth, billing, cloud sync, remote MCP, background workers, or multi-user support.
+- `--cwd` support on all commands (not just `spine init`)
+- Richer drift detection beyond git-native diff
+- Improved weekly review output
+- Migration tooling for `.spine/` state upgrades
+
+Not planned for this alpha: web UI, auth, billing, cloud sync, remote MCP, or multi-user support.
 
 ## Alpha Status
 
-This is an **alpha** release. The core command surface is stable and validated, but rough edges remain. Do not use in production without review.
+This is an **alpha release**. The core command surface is stable and validated, but breaking changes are possible before v1. Do not use in production without review.
 
 ---
 
-*Built with [Claude Code](https://claude.ai/code)*
+<div align="center">
+<sub>Built with <a href="https://claude.ai/code">Claude Code</a></sub>
+</div>

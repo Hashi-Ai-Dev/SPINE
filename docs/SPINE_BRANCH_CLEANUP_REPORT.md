@@ -2,34 +2,44 @@
 
 **Generated:** 2026-04-07
 **Context:** Pre-alpha-release branch audit for `prep/v0.1.1-alpha`
+**Remote branches confirmed at time of audit:** `origin/claude/alpha-release-prep-DU2Ul`, `origin/prep/v0.1.1-alpha`
 
 ---
 
 ## Summary
 
-7 branches classified. Do NOT delete remote branches automatically. All remote deletions
-require explicit human action.
+Branches classified below. All remote branch deletions require explicit human action — do NOT delete automatically.
+
+Additional branches listed in the Known Branches section below may exist remotely but were not visible in this environment. Confirm with `git fetch --all && git branch -r` before deleting anything.
 
 ---
 
 ## Branch Classification
 
-| Branch | Status | Recommendation | Reason |
-|--------|--------|----------------|--------|
-| `main` | Active, default target | **Keep** | Default/target branch. All PRs merge here. |
-| `prep/v0.1.1-alpha` | Active, alpha release prep | **Keep** | The branch under review. Contains README cleanup, SPINE evidence/decisions for this cleanup pass, and the branch cleanup report. Should be merged to `main` after human review. |
-| `claude/alpha-release-prep-DU2Ul` | Stale automation branch | **Likely safe to delete later** | Was the working branch for this cleanup session's initial state. Changes were moved to `prep/v0.1.1-alpha`. Contains no unique work not present in `prep/v0.1.1-alpha`. |
-| `claude/dogfood-phase3a-polish-zHDuu` | Stale | **Likely safe to delete later** | Dogfood polish pass branch. Work was folded into the main alpha branch. No active PRs observed. |
-| `claude/dogfood-phase3a-artifact-hygiene` | Stale | **Likely safe to delete later** | Artifact hygiene pass. Work completed and integrated. |
-| `claude/dogfood-phase3a-json-automation` | Stale | **Likely safe to delete later** | JSON automation work. Integrated into `prep/v0.1.1-alpha`. |
-| `claude/spine-phase-1-init-hOwIP` | Stale, historical | **Uncertain — leave alone** | Original Phase 1 `spine init` implementation branch. Could be useful for historical reference. Low risk either way, but leave for human decision. |
-| `codex/draft-official-phase-3a-spec-for-spine` | Stale spec branch | **Uncertain — leave alone** | Codex-generated spec draft. Not integrated into alpha. May be referenced for future planning. Leave for human decision. |
+| Branch | Location | Recommendation | Reason |
+|--------|----------|----------------|--------|
+| `main` | remote | **Keep** | Default/target branch. All PRs merge here. |
+| `prep/v0.1.1-alpha` | local + remote | **Keep** | Active release-prep branch. Merge to `main` after human review, then delete. |
+| `claude/alpha-release-prep-DU2Ul` | local + remote | **Likely safe to delete** | Working branch used during the cleanup session. Changes are fully merged into `prep/v0.1.1-alpha`. No unique work. |
+| `claude/dogfood-phase3a-polish-zHDuu` | remote (unconfirmed) | **Likely safe to delete** | Governance polish pass. Work was integrated into the main alpha branch. |
+| `claude/dogfood-phase3a-artifact-hygiene` | remote (unconfirmed) | **Likely safe to delete** | Artifact hygiene pass. Work completed and integrated. |
+| `claude/dogfood-phase3a-json-automation` | remote (unconfirmed) | **Likely safe to delete** | JSON automation pass. Integrated into `prep/v0.1.1-alpha`. |
+| `claude/spine-phase-1-init-hOwIP` | remote (unconfirmed) | **Uncertain — leave alone** | Original Phase 1 `spine init` implementation branch. Historical reference value. Low risk but leave for human decision. |
+| `codex/draft-official-phase-3a-spec-for-spine` | remote (unconfirmed) | **Uncertain — leave alone** | Codex-generated spec draft. Not integrated into alpha. May inform future planning. Leave for human decision. |
 
 ---
 
 ## Recommended Human Actions
 
-### Safe to delete (remote, when ready):
+### 1. Confirm remote branch list first
+
+```bash
+git fetch --all
+git branch -r
+```
+
+### 2. Safe to delete (when ready, after confirming no open PRs)
+
 ```bash
 git push origin --delete claude/alpha-release-prep-DU2Ul
 git push origin --delete claude/dogfood-phase3a-polish-zHDuu
@@ -37,23 +47,22 @@ git push origin --delete claude/dogfood-phase3a-artifact-hygiene
 git push origin --delete claude/dogfood-phase3a-json-automation
 ```
 
-### Leave alone until human review:
-- `claude/spine-phase-1-init-hOwIP` — historical reference value
+### 3. Leave for human decision (low priority)
+
+- `claude/spine-phase-1-init-hOwIP` — historical reference
 - `codex/draft-official-phase-3a-spec-for-spine` — may feed future planning
 
-### Must keep:
-- `main`
-- `prep/v0.1.1-alpha` (until merged)
+### 4. After merging `prep/v0.1.1-alpha` → `main`
+
+```bash
+# Delete the release-prep branch after successful merge
+git push origin --delete prep/v0.1.1-alpha
+```
 
 ---
 
-## Notes
+## Important Notes
 
-- Only 2 remote branches were visible from this environment at analysis time:
-  `origin/claude/alpha-release-prep-DU2Ul` and `origin/prep/v0.1.1-alpha`.
-  The other branches listed above (`claude/dogfood-*`, `claude/spine-phase-1-init-hOwIP`,
-  `codex/draft-*`) are classified based on the task description and may need to be
-  confirmed with `git branch -r` after a fresh `git fetch --all`.
-- Do NOT delete any branch without confirming it has no open PRs.
-- After merging `prep/v0.1.1-alpha` → `main`, the `prep/v0.1.1-alpha` branch itself
-  can be deleted.
+- **Never delete a branch with open PRs.** Verify PR state on GitHub before any deletion.
+- The "unconfirmed" branches above were described in the task brief but not directly observed via `git branch -r` in this environment (only 2 remote branches were visible). Run `git fetch --all` first to get the current full picture.
+- After the alpha merge and tagging, the branch cleanup can proceed safely.

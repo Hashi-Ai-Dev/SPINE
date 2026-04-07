@@ -1,6 +1,6 @@
 # SPINE Status
 
-**Last updated:** 2026-04-07 (normalized by RPmanager)
+**Last updated:** 2026-04-07 (post-beta-release normalization)
 **Repo:** `Hashi-Ai-Dev/SPINE`
 **Agent:** SPINE Repo Manager
 
@@ -23,30 +23,24 @@
 | Phase 1 + 2 | ✅ Complete |
 | v0.2 / Phase 3A | ✅ Complete — Alpha exit validated |
 | Alpha Exit → v0.2.0-beta | ✅ Released — v0.2.0-beta published (2026-04-07) |
-| Beta | 📋 Planned |
+| Beta | 🔄 Active — v0.2.0-beta released |
 | v1.0.0 | 📋 Planned |
 
 ---
 
 ## Current Milestone
 
-**`Alpha Exit — v0.2.0-beta`**
+**`Beta`** — v0.2.0-beta released. Phase 3B work begins.
 
 | # | Issue | Status |
 |---|------|--------|
-| #15 | Explicit repo targeting + `--cwd` contract | ✅ Done |
-| #16 | Repo/branch context visibility | ✅ Done |
-| #17 | Stable exit codes + JSON output | ✅ Done |
-| #18 | Bootstrap polish + discipline-tax ergonomics | ✅ Done (PR #26 merged) |
-| #23 | Artifact ergonomics contract | ✅ Done (PR #27 merged) |
-| #24 | External-repo onboarding docs | ✅ Done (PR #28 merged) |
-| #25 | Alpha-exit validation gate matrix | ✅ Done (PR #29 merged — 21 gates assessed, 20 pass, 1 partial) |
+| — | Beta planning | 📋 In progress — first Beta issue TBD |rtial) |
 
 ---
 
 ## Next Active Priority
 
-**Alpha exit complete.** All Phase 3A items done. Next: declare v0.2.0-beta tag and release, then open Beta milestone.
+**Beta operating state.** v0.2.0-beta released. Next: define first Beta milestone issue(s) and begin Phase 3B work.
 
 ---
 
@@ -56,7 +50,7 @@
 |---|---|---|
 | `v0.1.2` | Stabilization | ✅ Released |
 | `Alpha Exit — v0.2.0-beta` | Phase 3A complete + validation gates | ✅ Released — v0.2.0-beta (2026-04-07) |
-| `Beta` | Repeated-use proof, handoff primitives, preflight commands | 📋 Planned |
+| `Beta` | Repeated-use proof, discipline-tax reduction, agent-executable governance | 🔄 Active — v0.2.0-beta |
 | `v1.0.0` | Stable contracts, authority boundaries, automation surfaces | 📋 Planned |
 
 ---
@@ -75,4 +69,4 @@
 
 ---
 
-*Next status review: after alpha-exit validation gates pass*
+*Next status review: after first Beta milestone issues are defined*

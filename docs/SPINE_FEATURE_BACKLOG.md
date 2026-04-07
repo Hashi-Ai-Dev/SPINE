@@ -27,9 +27,9 @@ Grouped by target milestone. Each item: title, short description, why it matters
 **Status:** REJECTED — org-level concern, not a SPINE product issue. Close #8.
 
 ### ✅ Clarify onboarding / quickstart docs
-**Description:** Added Installation section, rewrote Quickstart to show external-repo `--cwd` flow as primary pattern, promoted `--cwd` over `SPINE_ROOT` for all commands, removed stale Known Limitations and What's Next items, fixed Python badge and test count.
+**Description:** Added Installation section (git clone + uv sync), rewrote Quickstart with `--cwd` as primary pattern, renamed "Governing an External Repo" section, removed stale references, fixed Python badge 3.11→3.12, updated test count.
 **Why it matters:** Public alpha with confusing onboarding loses users before they experience value.
-**Status:** DONE — Issue #9, merged in this pass (2026-04-07)
+**Status:** DONE — merged in PR #13 (2026-04-07)
 
 ---
 

@@ -53,7 +53,7 @@ Current stabilization target: **v0.1.2**
 - Further external-repo compatibility
 - CI/status check improvements
 
-**This milestone requires approved Phase 3A planning before any implementation begins.**
+**Phase 3A spec exists** at `docs/SPINE_PHASE3A_v0.2_SPEC.md`. Implementation requires human review + explicit approval.
 
 ---
 

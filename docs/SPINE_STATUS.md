@@ -79,9 +79,11 @@ Top items:
 
 ## Phase 3A Planning Status
 
-**Phase 3A spec** (`docs/SPINE_PHASE3A_v0.2_SPEC.md`) was referenced in prior audits but has not yet been committed to the repo. Planning should be completed and approved before v0.2 work begins.
+**Phase 3A spec** exists at `docs/SPINE_PHASE3A_v0.2_SPEC.md` — committed to repo.
 
-**Do not begin Phase 3A implementation without approved spec.**
+Planning status: ✅ Spec exists. **Requires human review and approval before implementation begins.**
+
+See GitHub issue #10 for the Phase 3A planning tracking issue.
 
 ---
 

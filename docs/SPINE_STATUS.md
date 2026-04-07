@@ -1,76 +1,103 @@
 # SPINE Status
 
-**Version:** v0.1.1-alpha
-**Updated:** 2026-04-06
-**Branch:** `prep/v0.1.1-alpha`
+**Last updated:** 2026-04-07
+**Repo:** `Hashi-Ai-Dev/HASHI.AI-Spine`
+**Agent:** SPINE Repo Manager
 
 ---
 
-## Current State: Alpha-Ready
+## Current Release
 
-SPINE has completed:
-1. Self-dogfood validation on its own repo ✅
-2. External repo validation on gsn-connector ✅
-3. Integration pass (approved Phase3A polish slices) ✅
-4. Smoke test from clean external repo ✅
-5. Full test suite: 122 passed, 1 skipped ✅
-
----
-
-## Command Surface
-
-### Implemented (Phase 1 + Phase 2)
-
-| Command | Status |
-|---------|--------|
-| `spine init` | ✅ |
-| `spine mission show` | ✅ (--json) |
-| `spine mission set` | ✅ |
-| `spine opportunity score` | ✅ |
-| `spine evidence add` | ✅ |
-| `spine decision add` | ✅ |
-| `spine drift scan` | ✅ |
-| `spine brief --target` | ✅ (latest.md) |
-| `spine review weekly` | ✅ (--json, latest.md, force=True) |
-| `spine doctor` | ✅ (--json, branch context) |
-| `spine mcp serve` | ✅ |
-
-### External Targeting
-- `SPINE_ROOT` env var: ✅ (binds both state AND git operations)
-- `spine init --cwd`: ✅ (creates .spine/ at target path)
+| | |
+|---|---|
+| **Version** | `v0.1.1-alpha` |
+| **Published** | 2026-04-07 |
+| **Tag** | `v0.1.1-alpha` at commit `3f2b3ef` |
+| **Type** | Public alpha (prerelease) |
+| **Next target** | `v0.1.2` |
 
 ---
 
-## Test Coverage
+## Current Phase
 
-- **122 tests passing** (1 skipped — Windows SIGINT platform issue, not a failure)
-- Tests cover: init, mission, opportunity, evidence, decision, drift, brief, review, doctor, MCP
+**Phase 2 Complete.** Full governance command suite implemented:
+- `spine init` — mission bootstrapping
+- `spine brief` — current mission display
+- `spine doctor` — environment validation
+- `spine mission` — goal check
+- `spine proof` — artifact manifest
+- `spine decision` — decision logger
+- `spine drift` — deviation detection
 
----
-
-## Known Rough Edges
-
-1. No `--cwd` on Phase 2 commands (only `SPINE_ROOT` env var for external targeting)
-2. `SPINE_ROOT` is process-global (no local/session scope)
-3. `spine brief` naming vs spec (`--target` vs `generate`)
-4. Doctor `get_open_drift()` minor path inconsistency
-5. `spine init --cwd` conflict check uses git-root's files
+Phase 1 + 2 = stable core. No known critical bugs. Alpha smoke test: 120+ tests passing.
 
 ---
 
-## Next Steps
+## Current Milestone
 
-- Merge `prep/v0.1.1-alpha` → `main` for public alpha release
-- Tag as `v0.1.1-alpha`
-- Announce on GitHub
+**`v0.1.2 — Stabilization** (planned, not started)
+
+Top items:
+1. Enable Dependabot alerts + secret scanning push protection (human: GitHub settings page)
+2. Add `--cwd` to Phase 2 commands
+3. Add minimal CI pipeline
+4. Create org-level ruleset for `Hashi-Ai-Dev`
+5. Clarify onboarding docs
 
 ---
 
-## Documentation
+## Current Blockers
 
-- `docs/SPINE_OFFICIAL_SPEC_v0.1.md` — authoritative spec
-- `docs/SPINE_ORIGIN_AND_PRODUCT_THESIS_v0.1.md` — product thesis
-- `docs/SPINE_v0.1.1_SELF_DOGFOOD_CLEANUP.md` — self-dogfood report
-- `docs/SPINE_v0.1.1_EXTERNAL_REPO_VALIDATION_gsn_connector.md` — external validation
-- `docs/SPINE_ALPHA_SMOKE_TEST_REPORT.md` — smoke test results
-- `docs/SPINE_PUBLIC_ALPHA_RELEASE_NOTES_DRAFT.md` — release notes draft
+| Blocker | Severity | Resolution |
+|---------|----------|------------|
+| GitHub secret scanning / Dependabot not enabled | High | Human visit: `github.com/Hashi-Ai-Dev/HASHI.AI-Spine/settings/security_and_analysis` |
+| GitHub org ruleset not created | Medium | Human or token: create org-level ruleset |
+
+---
+
+## Next 3 Moves
+
+1. **Add `--cwd` support to Phase 2 commands** — small scoped fix, unblocks external-repo usage
+2. **Write CI pipeline** — `ci.yml` with lint + test on push/PR; enables status checks
+3. **Update README quickstart** — clarify external-repo path; reduce onboarding friction
+
+*(After those: tag v0.1.2, publish release)*
+
+---
+
+## Branch / Release State
+
+| | |
+|---|---|
+| **Default branch** | `main` (protected) |
+| **Branch protection** | PR required + force-push blocked + delete blocked |
+| **Open PRs** | None |
+| **Open branches** | `main` only |
+| **Releases** | `v0.1.1-alpha` (published) |
+
+---
+
+## Phase 3A Planning Status
+
+**Phase 3A spec** (`docs/SPINE_PHASE3A_v0.2_SPEC.md`) was referenced in prior audits but has not yet been committed to the repo. Planning should be completed and approved before v0.2 work begins.
+
+**Do not begin Phase 3A implementation without approved spec.**
+
+---
+
+## Repo Health
+
+| Check | Status |
+|-------|--------|
+| README | ✅ Public-alpha appropriate |
+| LICENSE | ✅ MIT |
+| SECURITY.md | ✅ Contact + policy |
+| Branch protection | ✅ `main` protected |
+| Org ruleset | ❌ Not created |
+| CI pipeline | ❌ Not created |
+| Dependabot alerts | ⚠️ Human action required |
+| Secret scanning | ⚠️ Human action required |
+
+---
+
+*Next status review: when v0.1.2 is ready for release*

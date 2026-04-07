@@ -2,9 +2,9 @@
 
 ## Portability + Operator Polish
 
-**Status:** Near alpha exit. Issues #15–#18, #23, #24 complete. Issue #25 (validation gate) remaining before alpha exit.  
+**Status:** Alpha exit complete. Issues #15–#18, #23, #24, #25 all complete. Ready to declare v0.2.0-beta.  
 **Implementation state:** Issues #15, #16, #17, #18, and #23 (artifact ergonomics contract) **complete** (2026-04-07). Alpha-exit items #24, #25 are next.  
-**Next required step:** Alpha-exit item #25 (validation gate matrix). Once #25 passes, declare v0.2.0-beta and open Beta milestone.
+**Next required step:** Declare v0.2.0-beta release. Close Alpha Exit milestone. Open Beta milestone. Begin Phase 3B planning.
 
 ---
 

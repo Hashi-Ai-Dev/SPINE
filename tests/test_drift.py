@@ -34,6 +34,11 @@ def make_real_git_repo(tmp_path: Path) -> Path:
         cwd=tmp_path,
         capture_output=True,
     )
+    subprocess.run(
+        ["git", "config", "commit.gpgsign", "false"],
+        cwd=tmp_path,
+        capture_output=True,
+    )
     # Create initial file and commit
     (tmp_path / "README.md").write_text("# Test\n", encoding="utf-8")
     subprocess.run(["git", "add", "."], cwd=tmp_path, capture_output=True)
@@ -55,6 +60,11 @@ def make_real_git_repo_on_main(tmp_path: Path) -> Path:
     )
     subprocess.run(
         ["git", "config", "user.name", "Test User"],
+        cwd=tmp_path,
+        capture_output=True,
+    )
+    subprocess.run(
+        ["git", "config", "commit.gpgsign", "false"],
         cwd=tmp_path,
         capture_output=True,
     )
@@ -366,6 +376,7 @@ def test_drift_scan_spiner_root_targets_external_repo(tmp_path: Path) -> None:
     subprocess.run(["git", "init", "--initial-branch=main"], cwd=external_repo, capture_output=True)
     subprocess.run(["git", "config", "user.email", "test@test.com"], cwd=external_repo, capture_output=True)
     subprocess.run(["git", "config", "user.name", "Test User"], cwd=external_repo, capture_output=True)
+    subprocess.run(["git", "config", "commit.gpgsign", "false"], cwd=external_repo, capture_output=True)
     (external_repo / "README.md").write_text("# External\n", encoding="utf-8")
     subprocess.run(["git", "add", "."], cwd=external_repo, capture_output=True)
     subprocess.run(["git", "commit", "-m", "Initial commit"], cwd=external_repo, capture_output=True)
@@ -399,6 +410,7 @@ def test_drift_scan_spiner_root_targets_external_repo(tmp_path: Path) -> None:
     subprocess.run(["git", "init", "--initial-branch=main"], cwd=spine_repo, capture_output=True)
     subprocess.run(["git", "config", "user.email", "test@test.com"], cwd=spine_repo, capture_output=True)
     subprocess.run(["git", "config", "user.name", "Test User"], cwd=spine_repo, capture_output=True)
+    subprocess.run(["git", "config", "commit.gpgsign", "false"], cwd=spine_repo, capture_output=True)
     (spine_repo / "README.md").write_text("# SPINE\n", encoding="utf-8")
     subprocess.run(["git", "add", "."], cwd=spine_repo, capture_output=True)
     subprocess.run(["git", "commit", "-m", "Initial"], cwd=spine_repo, capture_output=True)
@@ -430,6 +442,7 @@ def test_resolve_roots_without_spiner_root_uses_cwd_repo(tmp_path: Path) -> None
     subprocess.run(["git", "init", "--initial-branch=main"], cwd=tmp_path, capture_output=True)
     subprocess.run(["git", "config", "user.email", "test@test.com"], cwd=tmp_path, capture_output=True)
     subprocess.run(["git", "config", "user.name", "Test User"], cwd=tmp_path, capture_output=True)
+    subprocess.run(["git", "config", "commit.gpgsign", "false"], cwd=tmp_path, capture_output=True)
     (tmp_path / "README.md").write_text("# Test\n", encoding="utf-8")
     subprocess.run(["git", "add", "."], cwd=tmp_path, capture_output=True)
     subprocess.run(["git", "commit", "-m", "Initial"], cwd=tmp_path, capture_output=True)

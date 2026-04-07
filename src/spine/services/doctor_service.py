@@ -79,7 +79,7 @@ class DoctorService:
                 issues.append(DoctorIssue(
                     severity="error",
                     file=fname,
-                    message=f"Missing repo contract file — run 'spine init' to create it",
+                    message="Missing repo contract file — run 'spine init' to create it",
                 ))
         return issues
 

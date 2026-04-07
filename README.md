@@ -144,7 +144,7 @@ Commands that require a git repo fail fast with a clear message when the resolve
 
 This alpha was validated against two repos before release:
 
-- **Self-governance:** Full governance loop on SPINE's own repo — mission set, evidence logged, decisions recorded, drift scanned, weekly review and agent briefs generated. Test suite: **136+ passing** (CI active on every push and PR).
+- **Self-governance:** Full governance loop on SPINE's own repo — mission set, evidence logged, decisions recorded, drift scanned, weekly review and agent briefs generated. Test suite: **300+ passing** (15 test files, CI active on every push and PR) (CI active on every push and PR).
 - **External repo (gsn-connector):** `--cwd` and `SPINE_ROOT` targeting verified end-to-end across all commands. Drift scan correctly read the external repo's git history. No state pollution between repos.
 
 ## Known Limitations
@@ -162,8 +162,8 @@ This is alpha software. Known rough edges:
 | Code | Meaning |
 |------|---------|
 | 0 | Success |
-| 2 | Not in a git repo (`--allow-no-git` to override) |
-| 3 | Conflicting existing files (`--force` to overwrite) |
+| 1 | Validation failure (invalid arguments, constraint violations) |
+| 2 | Context failure (missing git repo, missing .spine/, invalid paths) |
 
 ## Documentation
 

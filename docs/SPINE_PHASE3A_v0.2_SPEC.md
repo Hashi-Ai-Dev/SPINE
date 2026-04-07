@@ -2,9 +2,9 @@
 
 ## Portability + Operator Polish
 
-**Status:** Planning spec — normalized 2026-04-07. Implementation not yet authorized.  
-**Implementation state:** Not started. This document does **not** authorize or imply Phase 3A implementation work.  
-**Next required step:** Human review and explicit approval before any implementation begins.
+**Status:** Approved for implementation (2026-04-07). Implementation queue: issues #15–#18.  
+**Implementation state:** Approved for implementation. Implementation queue: issues #15–#18 on GitHub.  
+**Next required step:** None — Phase 3A is approved. Implementation may proceed issue by issue.
 
 ---
 
@@ -267,6 +267,6 @@ This Phase 3A planning spec reflects the state of SPINE as of v0.1.2 stabilizati
 
 ## 11) Planning Status Note
 
-Phase 3A is currently **specified, not approved for implementation**.  
+Phase 3A is **approved for implementation** (2026-04-07). Implementation queue is live.  
 The planning spec normalization pass (Issue #10) is complete as of 2026-04-07.  
-Any implementation must be separately authorized and executed as a bounded follow-on phase.
+Implementation may proceed issue by issue — see issues #15–#18.

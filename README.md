@@ -176,13 +176,14 @@ See [`docs/README.md`](docs/README.md) for the full documentation index.
 
 ## What's Next
 
-Near-term direction:
+Phase 3A is actively being implemented ([`docs/SPINE_PHASE3A_v0.2_SPEC.md`](docs/SPINE_PHASE3A_v0.2_SPEC.md)):
 
-- Richer drift detection beyond git-native diff
-- Improved weekly review output
-- Migration tooling for `.spine/` state upgrades
+- Explicit repo targeting contract + `--cwd` precedence normalization
+- Repo/branch context visibility + deterministic default branch resolution
+- Stable exit codes + `--json` output modes for CI workflows
+- Bootstrap polish + discipline-tax ergonomics
 
-Not planned for this alpha: web UI, auth, billing, cloud sync, remote MCP, or multi-user support.
+Not planned: web UI, auth, billing, cloud sync, remote MCP, or multi-user support.
 
 ## Alpha Status
 

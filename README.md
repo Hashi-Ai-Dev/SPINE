@@ -151,7 +151,7 @@ This alpha was validated against two repos before release:
 
 This is alpha software. Known rough edges:
 
-1. `SPINE_ROOT` is process-global — if set in a shell profile, all commands are affected. Prefer `--cwd` per-command.
+1. `SPINE_ROOT` is process-global — if set in a shell profile, all commands are affected. Use `--cwd` per-command to target a specific repo.
 2. No migration tooling yet — this is the first public release.
 3. JSONL logs are append-only — no undo or rollback.
 4. Single git repo per `.spine/` — cannot govern multiple repos from one state directory.
@@ -169,12 +169,8 @@ This is alpha software. Known rough edges:
 
 **Start here:**
 - [`docs/SPINE_OFFICIAL_SPEC_v0.1.md`](docs/SPINE_OFFICIAL_SPEC_v0.1.md) — authoritative design spec
-- [`docs/SPINE_PUBLIC_ALPHA_RELEASE_NOTES_DRAFT.md`](docs/SPINE_PUBLIC_ALPHA_RELEASE_NOTES_DRAFT.md) — full release notes
-- [`docs/SPINE_ORIGIN_AND_PRODUCT_THESIS_v0.1.md`](docs/SPINE_ORIGIN_AND_PRODUCT_THESIS_v0.1.md) — product thesis and motivation
-
-**Validation reports:**
-- [`docs/SPINE_ALPHA_SMOKE_TEST_REPORT.md`](docs/SPINE_ALPHA_SMOKE_TEST_REPORT.md) — smoke test results
-- [`docs/SPINE_v0.1.1_EXTERNAL_REPO_VALIDATION_gsn_connector.md`](docs/SPINE_v0.1.1_EXTERNAL_REPO_VALIDATION_gsn_connector.md) — external repo validation
+- [`docs/SPINE_FEATURE_BACKLOG.md`](docs/SPINE_FEATURE_BACKLOG.md) — current and planned features
+- [`docs/SPINE_ROADMAP.md`](docs/SPINE_ROADMAP.md) — phase map and milestone structure
 
 See [`docs/README.md`](docs/README.md) for the full documentation index.
 

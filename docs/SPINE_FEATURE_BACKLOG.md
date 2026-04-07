@@ -16,15 +16,15 @@ Grouped by target milestone. Each item: title, short description, why it matters
 **Why it matters:** Enables status checks on PRs, removes "always-passing" gap in branch protection, provides automated quality signal.
 **Status:** NOW
 
-### 🔄 Enable Dependabot alerts + secret scanning push protection
-**Description:** GitHub security settings that must be enabled manually at the repo settings page (not available via API on free tier).
+### ✅ Enable Dependabot alerts + secret scanning push protection
+**Description:** GitHub security settings enabled via GitHub settings page.
 **Why it matters:** Public repos need active vulnerability monitoring. Secret scanning push protection prevents credentials from being committed.
-**Status:** NOW (human action required at settings page)
+**Status:** DONE — enabled by owner via settings page.
 
-### 🔄 Create org-level ruleset for `Hashi-Ai-Dev`
-**Description:** A GitHub organization ruleset that enforces `main` branch protection across all repos in the org.
-**Why it matters:** Future repos spawned in the org will be unprotected without this. One-time setup.
-**Status:** NOW
+### ❌ ~~Create org-level ruleset for `Hashi-Ai-Dev`~~
+**Description:** ~~A GitHub organization ruleset that enforces `main` branch protection across all repos in the org.~~
+**Why it matters:** ~~Future repos spawned in the org will be unprotected without this.~~
+**Status:** REJECTED — org-level concern, not a SPINE product issue. Close #8.
 
 ### 🔄 Clarify onboarding / quickstart docs
 **Description:** README is clean but onboarding path for external users could be sharper — specifically around external-repo usage and first `spine brief` run.

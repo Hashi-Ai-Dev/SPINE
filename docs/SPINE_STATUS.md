@@ -37,7 +37,7 @@
 | #15 | Explicit repo targeting + `--cwd` contract | ✅ Done |
 | #16 | Repo/branch context visibility | ✅ Done |
 | #17 | Stable exit codes + JSON output | ✅ Done |
-| #18 | Bootstrap polish + discipline-tax ergonomics | ✅ Done |
+| #18 | Bootstrap polish + discipline-tax ergonomics | ✅ Done (PR #26 merged) |
 | #22 | Artifact ergonomics contract | 📋 Planned |
 | #23 | External-repo onboarding docs | 📋 Planned |
 | #24 | Alpha-exit validation gate matrix | 📋 Planned |
@@ -46,7 +46,7 @@
 
 ## Next Active Priority
 
-**Issue #22** — Artifact ergonomics contract. Next Phase 3A item after #18 completion.
+**Issue #22** — Artifact ergonomics contract. First of the alpha-exit items. Next in queue after #18.
 
 ---
 

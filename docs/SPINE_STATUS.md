@@ -27,13 +27,13 @@ Tests: **136+** passing.
 
 ---
 
-## Active Phase: v0.2 / Phase 3A — Approved ✅
+## Active Phase: v0.2 / Phase 3A — In Progress ✅
 
 Phase 3A spec (`docs/SPINE_PHASE3A_v0.2_SPEC.md`) has been **reviewed and approved by human**.
 
 **Phase 3A focus: Portability + Operator Polish**
 
-Implementation may now begin. The implementation queue is live on GitHub (issues #15–#18).
+Implementation queue is live on GitHub (issues #15–#18).
 
 ---
 
@@ -43,8 +43,8 @@ Implementation may now begin. The implementation queue is live on GitHub (issues
 |---|---|---|---|
 | #15 | Explicit repo targeting + `--cwd` contract normalization | 3A.2 | ✅ Done (PR #19 merged) |
 | #16 | Repo/branch context visibility + deterministic defaults | 3A.2 | ✅ Done (PR #20 merged) |
-| #17 | Operator/CI output modes + stable exit codes | 3A.3 | 🔄 Next |
-| #18 | Bootstrap polish + discipline-tax ergonomics | 3A | 📋 Planned |
+| #17 | Operator/CI output modes + stable exit codes | 3A.3 | ✅ Done (PR #21 merged) |
+| #18 | Bootstrap polish + discipline-tax ergonomics | 3A | 🔄 Next |
 
 Full spec: `docs/SPINE_PHASE3A_v0.2_SPEC.md`
 
@@ -57,6 +57,7 @@ Full spec: `docs/SPINE_PHASE3A_v0.2_SPEC.md`
 | **Default branch** | `main` (protected) |
 | **Branch protection** | PR required + CI status checks + force-push blocked + delete blocked |
 | **Open PRs** | None |
+| **Open branches** | `main` only |
 | **Releases** | `v0.1.1-alpha` · `v0.1.2` |
 
 ---
@@ -65,7 +66,7 @@ Full spec: `docs/SPINE_PHASE3A_v0.2_SPEC.md`
 
 | Check | Status |
 |-------|--------|
-| README | ✅ Clean |
+| README | ✅ Clean, public-alpha appropriate |
 | LICENSE | ✅ MIT |
 | SECURITY.md | ✅ Contact + policy |
 | Branch protection | ✅ Protected + CI required |
@@ -75,4 +76,4 @@ Full spec: `docs/SPINE_PHASE3A_v0.2_SPEC.md`
 
 ---
 
-*Next status review: after Phase 3A implementation begins*
+*Next status review: after v0.2 release*

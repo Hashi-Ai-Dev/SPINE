@@ -34,13 +34,16 @@
 
 | # | Issue | Status |
 |---|------|--------|
-| — | Beta planning | 📋 In progress — first Beta issue TBD |rtial) |
+| #31 | Beta: `spine check before-pr` — preflight checkpoint | 📋 Next (active) |
+| #32 | Beta: handoff/PR-prep summary primitive | 📋 Queued |
+| #33 | Beta: draftable governance records | 📋 Queued |
+| #34 | Beta: local optional hook/checkpoint integration | 📋 Queued |rtial) |
 
 ---
 
 ## Next Active Priority
 
-**Beta operating state.** v0.2.0-beta released. Next: define first Beta milestone issue(s) and begin Phase 3B work.
+**Beta operating state.** v0.2.0-beta released. Issue #31 is the active next implementation priority. Issues #32–#34 follow.
 
 ---
 

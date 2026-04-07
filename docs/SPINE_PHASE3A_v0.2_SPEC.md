@@ -4,7 +4,7 @@
 
 **Status:** In progress. Implementation queue: issues #15–#18, #23–#25.  
 **Implementation state:** Issues #15, #16, #17, #18, and #23 (artifact ergonomics contract) **complete** (2026-04-07). Alpha-exit items #24, #25 are next.  
-**Next required step:** Alpha-exit items #24 (external-repo docs), #25 (validation gate matrix).
+**Next required step:** Alpha-exit item #25 (validation gate matrix). Once #25 passes, declare v0.2.0-beta and open Beta milestone.
 
 ---
 

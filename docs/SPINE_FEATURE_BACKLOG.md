@@ -46,8 +46,10 @@ Grouped by target milestone. Each item: title, short description, why it matters
 **Status:** DONE — implemented in PR #27 (2026-04-07)
 
 ### ✅ External-repo onboarding docs (#24)
-**Description:** Practical guide for using SPINE in an arbitrary external repo — quickstart, governance walkthrough, `--cwd` vs `SPINE_ROOT` targeting, verification, and FAQ.
-**Status:** DONE — `docs/external-repo-onboarding.md` created
+**Description:** Practical guide for using SPINE in an arbitrary external repo. Created docs/external-repo-onboarding.md.
+**Status:** DONE — implemented in PR #28 (2026-04-07)
+**Description:** Practical guide for using SPINE in an arbitrary external repo.
+**Status:** IN QUEUE — Alpha Exit
 
 ### 📋 Alpha-exit validation gate matrix (#25)
 **Description:** Structured gate pass before declaring v0.2.0-beta.

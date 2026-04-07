@@ -48,10 +48,10 @@ Grouped by target milestone. Each item: title, short description, why it matters
 **Why it matters:** Operators need to always know which context SPINE is operating in.
 **Status:** DONE — implemented in PR #20 (2026-04-07)
 
-### 📋 [Phase 3A.3] Operator/CI output modes + stable exit codes (#17)
-**Description:** `--json` flag on key commands, reduced-noise mode, documented stable exit codes (0=success, 1=validation fail, 2=context fail).
+### ✅ [Phase 3A.3] Operator/CI output modes + stable exit codes (#17)
+**Description:** Stable exit codes (0=success, 1=validation fail, 2=context fail). `--json` output on all relevant commands. Error context in JSON on failure paths.
 **Why it matters:** Human-readable output is insufficient for CI and scripting.
-**Status:** APPROVED — implementation queue #17
+**Status:** DONE — implemented in PR #21 (2026-04-07)
 
 ### 📋 [Phase 3A] Bootstrap polish + discipline-tax ergonomics (#18)
 **Description:** Improve first-run messaging, reduce mandatory ceremony, improve default flows, clarify error messages.

@@ -23,7 +23,7 @@ Grouped by target milestone. Each item: title, short description, why it matters
 
 ---
 
-## Alpha Exit — v0.2.0-beta
+## Alpha Exit — v0.2.0-beta (RELEASED 2026-04-07)
 
 ### ✅ Explicit repo targeting contract (#15)
 **Description:** Fixed `--cwd` precedence over `SPINE_ROOT`. Targeting contract standardized.

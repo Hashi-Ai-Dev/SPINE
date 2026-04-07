@@ -10,9 +10,9 @@
 
 | | |
 |---|---|
-| **Version** | `v0.1.2` |
-| **Status** | Published (2026-04-07) |
-| **Target** | `v0.2.0-beta` — Alpha exit COMPLETE. Ready for beta.
+| **Version** | `v0.2.0-beta` |
+| **Status** | Published (2026-04-07) — pre-release |
+| **Target** | Beta
 
 ---
 
@@ -22,7 +22,7 @@
 |---|---|
 | Phase 1 + 2 | ✅ Complete |
 | v0.2 / Phase 3A | ✅ Complete — Alpha exit validated |
-| Alpha Exit → v0.2.0-beta | 🔄 In Progress — tag and release pending |
+| Alpha Exit → v0.2.0-beta | ✅ Released — v0.2.0-beta published (2026-04-07) |
 | Beta | 📋 Planned |
 | v1.0.0 | 📋 Planned |
 
@@ -55,7 +55,7 @@
 | Milestone | Scope | Status |
 |---|---|---|
 | `v0.1.2` | Stabilization | ✅ Released |
-| `Alpha Exit — v0.2.0-beta` | Phase 3A complete + validation gates | 🔄 In Progress |
+| `Alpha Exit — v0.2.0-beta` | Phase 3A complete + validation gates | ✅ Released — v0.2.0-beta (2026-04-07) |
 | `Beta` | Repeated-use proof, handoff primitives, preflight commands | 📋 Planned |
 | `v1.0.0` | Stable contracts, authority boundaries, automation surfaces | 📋 Planned |
 

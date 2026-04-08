@@ -1,6 +1,6 @@
 # SPINE Status
 
-**Last updated:** 2026-04-08 (Issue #50: before-work / start-session governance checkpoint)
+**Last updated:** 2026-04-08 (Issue #50 — in review, PR #54)
 **Repo:** `Hashi-Ai-Dev/SPINE`
 
 ---
@@ -45,9 +45,9 @@
 | #37 | Compatibility/integration guide | ✅ Done |
 | #38 | Deterministic validation fixtures | ✅ Done |
 | #49 | Write-flow machine-readable consistency | ✅ Done |
-| #50 | `spine check before-work` start-session checkpoint | ✅ Done — branch claude/issue-50-checkpoint-2Aq80 |
+| #50 | `spine check before-work` start-session checkpoint | 📋 In review (PR #54) |
 
-### Beta Feature Queue
+### Beta Polish Queue
 
 | # | Issue | Status |
 |---|---|---|
@@ -57,7 +57,7 @@
 
 ## Next Active Priority
 
-**Issue #51** — Beta-exit proof/validation. Issue #50 done.
+**Issue #50 in review (PR #54).** Beta polish: #51 remaining.
 
 ---
 

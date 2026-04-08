@@ -28,6 +28,24 @@ jobs:
         run: uv run python --version && uv run python -c "import sys; print(sys.executable)"
 
       - name: Run tests
-        run: uv run pytest -v --tb=long
+        run: |
+          set -o pipefail
+          uv run pytest -v --tb=short 2>&1 | tee /tmp/pytest_output.txt
         env:
           NO_COLOR: "1"
+
+      - name: Post test output as PR comment (on failure)
+        if: failure() && github.event_name == 'pull_request'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          REPO: ${{ github.repository }}
+        run: |
+          {
+            echo "## CI Test Output (diagnostic)"
+            echo ""
+            echo '```'
+            tail -200 /tmp/pytest_output.txt 2>/dev/null || echo "No output captured"
+            echo '```'
+          } > /tmp/comment_body.txt
+          gh pr comment "$PR_NUMBER" --repo "$REPO" --body-file /tmp/comment_body.txt

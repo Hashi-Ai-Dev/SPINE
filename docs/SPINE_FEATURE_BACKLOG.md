@@ -26,35 +26,30 @@ Grouped by target milestone. Each item: title, short description, why it matters
 
 ## Beta — v0.2.0-beta
 
-> ⚠️ **BLOCKERS found in shipped Beta features (Beta Bug Hunt audit, PR #42):**
-> - **#43** — `check before-pr` exits 1 on healthy repos (A-01) — regression in #31
-> - **#44** — hook script missing `uv run` (A-02) — regression in #34
-> - **#45** — AGENTS.md template has invalid commands (A-06) — shipped to users
->
-> Fix these regressions before shipping more Beta features.
+> ✅ Beta blocker stabilization complete (PR #46). Beta core queue complete. Beta polish active.
 
-### ✅ `spine check before-pr` preflight checkpoint (#31)
-**Status:** DONE — PR #35
+### Completed Beta Issues
 
-### ✅ Handoff/PR-prep summary primitive (#32)
-**Status:** DONE — PR #39
+| # | Issue | PR |
+|---|---|---|
+| #31 | `spine check before-pr` preflight checkpoint | PR #35 |
+| #32 | Handoff/PR-prep summary primitive | PR #39 |
+| #33 | Draftable governance records | PR #40 |
+| #34 | Local optional hook/checkpoint integration | PR #41 |
+| #36 | Mission refine draft flow | PR #47 |
+| #37 | Compatibility/integration guide | PR #48 |
+| #38 | Deterministic validation fixtures | PR #52 |
+| #43 | `check before-pr` exit 1 on healthy repos | PR #46 |
+| #44 | Hook script missing `uv run` | PR #46 |
+| #45 | AGENTS.md template invalid commands | PR #46 |
+| #49 | Write-flow machine-readable consistency | PR #53 |
+| #50 | Before-work / start-session governance checkpoint | PR #54 |
 
-### ✅ Draftable governance records (#33)
-**Status:** DONE — PR #40
+### Beta Polish Queue
 
-### ✅ Local optional hook/checkpoint integration (#34)
-**Status:** DONE — PR #41
-
-### 📋 Mission refine draft flow (#36)
-**Status:** QUEUED — after blockers fixed
-
-### 📋 Compatibility/integration guide (#37)
-**Description:** Public guide for SPINE + Claude Code / oh-my-claudecode / Superpowers layering.
-**Status:** QUEUED — after #36
-
-### 📋 Deterministic validation fixtures (#38)
-**Description:** Fixture harness for repeatable command/file/contract validation.
-**Status:** QUEUED — after #36
+| # | Issue | Status |
+|---|---|---|
+| #51 | Beta-exit proof/validation | 📋 Next — last Beta polish issue |
 
 ---
 
@@ -74,4 +69,4 @@ Grouped by target milestone. Each item: title, short description, why it matters
 
 ---
 
-*Last updated: 2026-04-08 by SPINE Repo Manager Agent*
+*Last updated: 2026-04-08 — Issue #50 merged, Beta polish one issue remaining (#51)*

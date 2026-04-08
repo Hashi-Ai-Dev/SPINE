@@ -61,10 +61,10 @@ Grouped by target milestone. Each item: title, short description, why it matters
 
 > Beta milestone — Phase 3B. Issues execute in order: #31 first, then #32–#34.
 
-### 📋 `spine check before-pr` — preflight checkpoint (#31)
+### ✅ `spine check before-pr` — preflight checkpoint (#31)
 **Description:** Bounded preflight checkpoint command before PRs. Exit 0=pass, exit 1=review recommended. Local, explicit, operator-controlled.
 **Why it matters:** Makes governance part of the natural PR workflow without daemon behavior.
-**Status:** ACTIVE — first Beta implementation slice
+**Status:** DONE — implemented in branch `claude/issue31-check-before-pr-6z236` (2026-04-08)
 
 ### 📋 Handoff/PR-prep summary primitive (#32)
 **Description:** `spine brief handoff` — generates human-readable governance summary for PR context.

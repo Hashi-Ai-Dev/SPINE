@@ -12,6 +12,7 @@ from spine.services.drift_service import DriftService, DriftScanResult
 from spine.services.brief_service import BriefService
 from spine.services.review_service import ReviewService
 from spine.services.doctor_service import DoctorService, DoctorResult, DoctorIssue
+from spine.services.check_service import CheckService, BeforePrResult, CheckItem
 
 __all__ = [
     "InitService",
@@ -34,4 +35,7 @@ __all__ = [
     "DoctorService",
     "DoctorResult",
     "DoctorIssue",
+    "CheckService",
+    "BeforePrResult",
+    "CheckItem",
 ]

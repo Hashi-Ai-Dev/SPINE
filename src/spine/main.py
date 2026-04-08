@@ -14,5 +14,6 @@ import spine.cli.brief_cmd  # noqa: F401 — registers @app.command("brief")
 import spine.cli.review_cmd  # noqa: F401 — registers @app.command("review"), "review-weekly"
 import spine.cli.doctor_cmd  # noqa: F401 — registers @app.command("doctor")
 import spine.cli.mcp_cmd  # noqa: F401 — registers @app.command("mcp")
+import spine.cli.check_cmd  # noqa: F401 — registers @app.command("check"), "check before-pr"
 
 __all__ = ["app"]

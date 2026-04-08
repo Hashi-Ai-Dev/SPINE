@@ -1,0 +1,263 @@
+"""CheckService — preflight checkpoint for before-PR governance checks."""
+
+from __future__ import annotations
+
+from dataclasses import dataclass, field
+from pathlib import Path
+from typing import Literal
+
+from spine import constants as C
+from spine.services.doctor_service import DoctorService
+from spine.utils.jsonl import read_jsonl
+
+CheckResult = Literal["pass", "review_recommended"]
+
+
+@dataclass
+class CheckItem:
+    """A single result from a preflight check."""
+
+    name: str
+    status: Literal["pass", "warn", "fail"]
+    message: str
+
+
+@dataclass
+class BeforePrResult:
+    """Aggregated result of the before-pr preflight checks."""
+
+    repo: str
+    branch: str
+    items: list[CheckItem] = field(default_factory=list)
+
+    @property
+    def result(self) -> CheckResult:
+        """Return overall result: pass if no fails or warns, else review_recommended."""
+        for item in self.items:
+            if item.status in ("warn", "fail"):
+                return "review_recommended"
+        return "pass"
+
+    @property
+    def passed(self) -> bool:
+        return self.result == "pass"
+
+
+class CheckService:
+    """
+    Preflight checkpoint service for `spine check before-pr`.
+
+    Composes existing DoctorService and reads drift/evidence/decision state.
+    Does NOT mutate any state, make network calls, or install hooks.
+    """
+
+    def __init__(self, repo_root: Path, *, spine_root: Path | None = None) -> None:
+        self.repo_root = repo_root
+        self._spine_root = spine_root or repo_root / C.SPINE_DIR
+
+    def run_before_pr(self, branch: str) -> BeforePrResult:
+        """
+        Run all before-pr preflight checks.
+
+        Checks (in order):
+        1. Mission presence/readability
+        2. Doctor-style repo health (no errors)
+        3. Open drift in drift.jsonl
+        4. Evidence presence (lightweight)
+        5. Decision presence (lightweight)
+
+        Returns a BeforePrResult with all individual check items and
+        the final aggregated result (pass | review_recommended).
+        """
+        result = BeforePrResult(repo=str(self.repo_root), branch=branch)
+
+        result.items.append(self._check_spine_dir())
+        if result.items[-1].status == "fail":
+            # Cannot proceed with further checks — .spine/ is missing
+            return result
+
+        result.items.append(self._check_mission())
+        result.items.extend(self._check_doctor_health())
+        result.items.append(self._check_open_drift())
+        result.items.append(self._check_evidence_presence())
+        result.items.append(self._check_decision_presence())
+
+        return result
+
+    # ------------------------------------------------------------------
+    # Individual checks
+    # ------------------------------------------------------------------
+
+    def _check_spine_dir(self) -> CheckItem:
+        """Check that .spine/ directory exists."""
+        if not self._spine_root.exists():
+            return CheckItem(
+                name="spine_dir",
+                status="fail",
+                message=".spine/ not found — run 'spine init' to bootstrap governance state",
+            )
+        return CheckItem(
+            name="spine_dir",
+            status="pass",
+            message=".spine/ found",
+        )
+
+    def _check_mission(self) -> CheckItem:
+        """Check mission.yaml is present and readable."""
+        mission_path = self._spine_root / C.MISSION_FILE
+        if not mission_path.exists():
+            return CheckItem(
+                name="mission",
+                status="fail",
+                message="mission.yaml not found",
+            )
+        try:
+            from spine.models import MissionModel
+            raw = mission_path.read_text(encoding="utf-8")
+            MissionModel.from_yaml(raw)
+        except Exception as exc:
+            return CheckItem(
+                name="mission",
+                status="fail",
+                message=f"mission.yaml unreadable: {exc}",
+            )
+        return CheckItem(
+            name="mission",
+            status="pass",
+            message="mission.yaml present and readable",
+        )
+
+    def _check_doctor_health(self) -> list[CheckItem]:
+        """Run doctor checks and surface errors/warnings as check items."""
+        service = DoctorService(self.repo_root, spine_root=self._spine_root)
+        doctor_result = service.check()
+
+        items: list[CheckItem] = []
+        errors = [i for i in doctor_result.issues if i.severity == "error"]
+        warnings = [i for i in doctor_result.issues if i.severity == "warning"]
+
+        if errors:
+            # Summarise errors into a single check item
+            msg = "; ".join(f"{i.file}: {i.message}" for i in errors[:3])
+            if len(errors) > 3:
+                msg += f" (and {len(errors) - 3} more)"
+            items.append(CheckItem(
+                name="doctor",
+                status="fail",
+                message=f"{len(errors)} doctor error(s): {msg}",
+            ))
+        elif warnings:
+            msg = "; ".join(f"{i.file}: {i.message}" for i in warnings[:3])
+            if len(warnings) > 3:
+                msg += f" (and {len(warnings) - 3} more)"
+            items.append(CheckItem(
+                name="doctor",
+                status="warn",
+                message=f"{len(warnings)} doctor warning(s): {msg}",
+            ))
+        else:
+            items.append(CheckItem(
+                name="doctor",
+                status="pass",
+                message="repo health OK",
+            ))
+
+        return items
+
+    def _check_open_drift(self) -> CheckItem:
+        """Check whether any drift events are recorded in drift.jsonl."""
+        drift_path = self._spine_root / C.DRIFT_FILE
+        if not drift_path.exists():
+            return CheckItem(
+                name="drift",
+                status="pass",
+                message="no drift log found (clean)",
+            )
+        try:
+            records = read_jsonl(drift_path)
+        except Exception:
+            return CheckItem(
+                name="drift",
+                status="warn",
+                message="drift.jsonl unreadable — verify manually",
+            )
+        if records:
+            high = sum(1 for r in records if r.get("severity") == "high")
+            medium = sum(1 for r in records if r.get("severity") == "medium")
+            low = sum(1 for r in records if r.get("severity") == "low")
+            parts = []
+            if high:
+                parts.append(f"{high} high")
+            if medium:
+                parts.append(f"{medium} medium")
+            if low:
+                parts.append(f"{low} low")
+            severity_str = ", ".join(parts) if parts else str(len(records))
+            return CheckItem(
+                name="drift",
+                status="warn",
+                message=f"{len(records)} drift event(s) logged ({severity_str}) — review before PR",
+            )
+        return CheckItem(
+            name="drift",
+            status="pass",
+            message="no drift events logged",
+        )
+
+    def _check_evidence_presence(self) -> CheckItem:
+        """Check whether any evidence records exist (lightweight — presence only)."""
+        evidence_path = self._spine_root / C.EVIDENCE_FILE
+        if not evidence_path.exists():
+            return CheckItem(
+                name="evidence",
+                status="warn",
+                message="evidence.jsonl not found — consider logging evidence before PR",
+            )
+        try:
+            records = read_jsonl(evidence_path)
+        except Exception:
+            return CheckItem(
+                name="evidence",
+                status="warn",
+                message="evidence.jsonl unreadable",
+            )
+        if not records:
+            return CheckItem(
+                name="evidence",
+                status="warn",
+                message="no evidence recorded — consider 'spine evidence add' before PR",
+            )
+        return CheckItem(
+            name="evidence",
+            status="pass",
+            message=f"{len(records)} evidence record(s) present",
+        )
+
+    def _check_decision_presence(self) -> CheckItem:
+        """Check whether any decision records exist (lightweight — presence only)."""
+        decisions_path = self._spine_root / C.DECISIONS_FILE
+        if not decisions_path.exists():
+            return CheckItem(
+                name="decisions",
+                status="warn",
+                message="decisions.jsonl not found — consider logging decisions before PR",
+            )
+        try:
+            records = read_jsonl(decisions_path)
+        except Exception:
+            return CheckItem(
+                name="decisions",
+                status="warn",
+                message="decisions.jsonl unreadable",
+            )
+        if not records:
+            return CheckItem(
+                name="decisions",
+                status="warn",
+                message="no decisions recorded — consider 'spine decision add' before PR",
+            )
+        return CheckItem(
+            name="decisions",
+            status="pass",
+            message=f"{len(records)} decision record(s) present",
+        )

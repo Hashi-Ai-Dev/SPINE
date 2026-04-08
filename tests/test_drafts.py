@@ -16,7 +16,6 @@ import json
 import os
 from pathlib import Path
 
-import pytest
 from typer.testing import CliRunner
 
 from spine.main import app
@@ -102,7 +101,7 @@ def test_evidence_draft_not_appended_to_canonical(tmp_path: Path) -> None:
     )
 
     evidence_file = tmp_path / ".spine" / "evidence.jsonl"
-    lines = [l for l in evidence_file.read_text().splitlines() if l.strip()]
+    lines = [line for line in evidence_file.read_text().splitlines() if line.strip()]
     assert len(lines) == 0, "Draft must not appear in evidence.jsonl"
 
 
@@ -204,7 +203,7 @@ def test_decision_draft_not_appended_to_canonical(tmp_path: Path) -> None:
     )
 
     decisions_file = tmp_path / ".spine" / "decisions.jsonl"
-    lines = [l for l in decisions_file.read_text().splitlines() if l.strip()]
+    lines = [line for line in decisions_file.read_text().splitlines() if line.strip()]
     assert len(lines) == 0, "Draft must not appear in decisions.jsonl"
 
 
@@ -333,7 +332,7 @@ def test_drafts_confirm_evidence_promotes_to_canonical(tmp_path: Path) -> None:
 
     # evidence.jsonl should contain the record
     evidence_file = tmp_path / ".spine" / "evidence.jsonl"
-    lines = [l for l in evidence_file.read_text().splitlines() if l.strip()]
+    lines = [line for line in evidence_file.read_text().splitlines() if line.strip()]
     assert len(lines) == 1
     record = json.loads(lines[0])
     assert record["kind"] == "commit"
@@ -367,7 +366,7 @@ def test_drafts_confirm_decision_promotes_to_canonical(tmp_path: Path) -> None:
 
     # decisions.jsonl should contain the record
     decisions_file = tmp_path / ".spine" / "decisions.jsonl"
-    lines = [l for l in decisions_file.read_text().splitlines() if l.strip()]
+    lines = [line for line in decisions_file.read_text().splitlines() if line.strip()]
     assert len(lines) == 1
     record = json.loads(lines[0])
     assert record["title"] == "Confirmed decision"
@@ -417,7 +416,7 @@ def test_draft_excluded_from_evidence_jsonl(tmp_path: Path) -> None:
     run_evidence_add(tmp_path, "--kind", "pr", "--description", "draft only", "--draft")
 
     evidence_file = tmp_path / ".spine" / "evidence.jsonl"
-    lines = [l for l in evidence_file.read_text().splitlines() if l.strip()]
+    lines = [line for line in evidence_file.read_text().splitlines() if line.strip()]
     assert len(lines) == 1, "Only canonical record should be in evidence.jsonl"
     assert json.loads(lines[0])["description"] == "canonical"
 
@@ -431,7 +430,7 @@ def test_draft_excluded_from_decisions_jsonl(tmp_path: Path) -> None:
     run_decision_add(tmp_path, "--title", "Draft only", "--why", "W", "--decision", "D", "--draft")
 
     decisions_file = tmp_path / ".spine" / "decisions.jsonl"
-    lines = [l for l in decisions_file.read_text().splitlines() if l.strip()]
+    lines = [line for line in decisions_file.read_text().splitlines() if line.strip()]
     assert len(lines) == 1
     assert json.loads(lines[0])["title"] == "Canonical"
 
@@ -501,7 +500,7 @@ def test_drafts_confirm_with_cwd(tmp_path: Path) -> None:
     assert result.exit_code == 0, result.output
 
     evidence_file = tmp_path / ".spine" / "evidence.jsonl"
-    lines = [l for l in evidence_file.read_text().splitlines() if l.strip()]
+    lines = [line for line in evidence_file.read_text().splitlines() if line.strip()]
     assert len(lines) == 1
     assert json.loads(lines[0])["description"] == "cwd confirm test"
 
@@ -545,5 +544,5 @@ def test_confirm_one_draft_leaves_others(tmp_path: Path) -> None:
     assert remaining[0] != files[0], "The other draft should remain"
 
     evidence_file = tmp_path / ".spine" / "evidence.jsonl"
-    lines = [l for l in evidence_file.read_text().splitlines() if l.strip()]
+    lines = [line for line in evidence_file.read_text().splitlines() if line.strip()]
     assert len(lines) == 1

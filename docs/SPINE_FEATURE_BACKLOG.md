@@ -69,13 +69,12 @@ Grouped by target milestone. Each item: title, short description, why it matters
 **Status:** DONE — implemented in PR #40 (2026-04-08)
 
 ### ✅ Local optional hook/checkpoint integration (#34)
-**Description:** `spine hooks install/list/uninstall` — opt-in pre-push hook wiring.
-**Why it matters:** Operators who want enforcement can opt in without daemon or cloud dependency.
+**Description:** `spine hooks install/list/uninstall` — opt-in pre-PR hook wiring.
 **Status:** DONE — implemented in PR #41 (2026-04-08)
 
 ### 📋 Mission refine draft flow (#36)
 **Description:** `spine mission refine` — explicit operator-invoked refinement producing draft mission.
-**Status:** QUEUED — after #34
+**Status:** NEXT ACTIVE — fifth Beta slice
 
 ### 📋 Compatibility/integration guide (#37)
 **Description:** Public guide for SPINE + Claude Code / oh-my-claudecode / Superpowers layering.

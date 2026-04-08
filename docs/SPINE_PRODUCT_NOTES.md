@@ -59,6 +59,26 @@ Not core right now. Only consider much later, and only if explicit/local/optiona
 
 ---
 
+
+
+## Operator Model
+
+SPINE is designed for an operator who is:
+- high-agency and autonomous
+- nonlinear in how they work
+- context-switch-prone
+- vulnerable to branch explosion and agent-generated chaos
+- especially impacted by ambiguity in governance state
+
+This means SPINE should never assume the operator is naturally linear, ceremony-tolerant, or consistent at remembering governance steps manually. Governance must fit around how operators actually work — not the other way around.
+
+**Implications for product direction:**
+- Explicit checkpoints reduce the mental load of remembering what to verify
+- Draft-first governance means provisional work doesn't require cleanup until ready
+- Handoff summaries reduce context-switch cost when returning to a project
+- Local opt-in hooks make governance available without being obtrusive
+- Strong queue clarity and anti-drift structure compensate for nonlinear workflow
+
 ## Anti-Drift Rules
 
 These insights were classified against SPINE's core identity:

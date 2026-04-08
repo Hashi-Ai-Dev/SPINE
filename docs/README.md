@@ -21,6 +21,7 @@ This index organizes all documentation in this repository. New users should star
 | [`ROADMAP.md`](ROADMAP.md) | Public product roadmap — alpha exit criteria, beta direction, and v1.0.0 goals |
 | [`SPINE_STATUS.md`](SPINE_STATUS.md) | Current implementation status — command surface, known issues |
 | [`SPINE_FEATURE_BACKLOG.md`](SPINE_FEATURE_BACKLOG.md) | Feature backlog by milestone |
+| [`SPINE_COMPETITIVE_INPUTS.md`](SPINE_COMPETITIVE_INPUTS.md) | External product inputs — preserved for planning (not active scope) |
 
 ---
 

@@ -1,0 +1,12 @@
+{
+  "_description": "Expected JSON output shape for: spine doctor --json",
+  "_command": "spine doctor [--cwd <path>] --json",
+  "_exit_codes": {"0": "healthy", "1": "issues found"},
+  "required_keys": ["passed", "error_count", "warning_count", "issues"],
+  "key_types": {
+    "passed": "bool",
+    "error_count": "int",
+    "warning_count": "int",
+    "issues": "list"
+  }
+}

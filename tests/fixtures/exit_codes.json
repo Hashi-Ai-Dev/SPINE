@@ -1,0 +1,42 @@
+{
+  "_description": "Canonical exit code contracts for all SPINE CLI commands",
+  "exit_code_semantics": {
+    "0": "success — operation completed, state is healthy",
+    "1": "validation failure — bad input or state requiring operator attention",
+    "2": "context failure — no git repo or invalid --cwd target for commands requiring it",
+    "3": "conflict — resource already exists (use --force to overwrite)"
+  },
+  "_notes": [
+    "Exit 2 means the command could not find a valid git context at all.",
+    "Commands like doctor and check before-pr run even without .spine/ — they report errors via exit 1.",
+    "Commands like review weekly and drift scan work on any git repo — no .spine/ required.",
+    "Commands like mission show, brief require .spine/ and exit 2 if it is missing."
+  ],
+  "command_scenarios": [
+    {"command": "spine init", "scenario": "new repo, no prior .spine/", "expected": 0},
+    {"command": "spine init", "scenario": "already initialized, no --force", "expected": 3},
+    {"command": "spine init --force", "scenario": "already initialized", "expected": 0},
+    {"command": "spine init", "scenario": "no git repository", "expected": 2},
+    {"command": "spine mission show", "scenario": "valid .spine/ repo", "expected": 0},
+    {"command": "spine mission show", "scenario": "git repo, no .spine/", "expected": 2},
+    {"command": "spine mission set --title X", "scenario": "valid repo, valid title", "expected": 0},
+    {"command": "spine mission set --status invalid", "scenario": "invalid status enum", "expected": 1},
+    {"command": "spine doctor", "scenario": "healthy .spine/ repo", "expected": 0},
+    {"command": "spine doctor", "scenario": "repo has issues", "expected": 1},
+    {"command": "spine doctor", "scenario": "git repo, no .spine/", "expected": 1, "_note": "doctor runs and reports ERROR for missing .spine/ — exits 1, not 2"},
+    {"command": "spine doctor", "scenario": "no git repo at all", "expected": 2},
+    {"command": "spine check before-pr", "scenario": "init + evidence + decisions present", "expected": 0},
+    {"command": "spine check before-pr", "scenario": "init but no evidence/decisions", "expected": 1, "_note": "warns about missing evidence/decisions"},
+    {"command": "spine check before-pr", "scenario": "git repo, no .spine/", "expected": 1, "_note": "reports spine_dir FAIL via exit 1, not 2"},
+    {"command": "spine brief --target claude", "scenario": "valid .spine/ repo", "expected": 0},
+    {"command": "spine brief --target invalid_agent", "scenario": "invalid target name", "expected": 1},
+    {"command": "spine brief --target claude", "scenario": "git repo, no .spine/", "expected": 2},
+    {"command": "spine review weekly", "scenario": "valid repo", "expected": 0},
+    {"command": "spine review handoff", "scenario": "valid .spine/ repo", "expected": 0},
+    {"command": "spine drift scan", "scenario": "valid git repo", "expected": 0},
+    {"command": "spine evidence add --kind commit --description X", "scenario": "valid .spine/ repo", "expected": 0},
+    {"command": "spine evidence add", "scenario": "missing required flags", "expected": 1},
+    {"command": "spine decision add --title X --why Y --decision Z", "scenario": "valid .spine/ repo", "expected": 0},
+    {"command": "spine decision add", "scenario": "missing required fields", "expected": 1}
+  ]
+}

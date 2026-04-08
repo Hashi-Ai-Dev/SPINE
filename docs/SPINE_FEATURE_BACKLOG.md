@@ -54,7 +54,7 @@ Grouped by target milestone. Each item: title, short description, why it matters
 
 ### 📋 Deterministic validation fixtures (#38)
 **Description:** Fixture harness for repeatable command/file/contract validation.
-**Status:** QUEUED — after #36
+**Status:** IN REVIEW — PR #52
 
 ---
 

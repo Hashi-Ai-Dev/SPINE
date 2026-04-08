@@ -1,0 +1,31 @@
+version: 1
+id: mission-test-001
+title: "Beta hardening — deterministic fixture contracts"
+status: active
+target_user: "AI coding agents and human operators"
+user_problem: "Need explicit, stable governance contracts across Beta changes"
+one_sentence_promise: "SPINE provides deterministic, inspectable governance with stable contracts"
+success_metric:
+  type: milestone
+  value: "Beta exit validated"
+deadline_window_days: 30
+review_cadence: weekly
+preferred_runtimes:
+  - python
+preferred_models: {}
+allowed_scope:
+  - governance
+  - contract-testing
+  - beta-hardening
+forbidden_expansions:
+  - cloud services
+  - authentication
+  - billing
+  - multi-user
+proof_requirements:
+  - all pytest tests pass
+  - fixture contracts validated
+kill_conditions:
+  - scope expands to cloud/runtime services
+created_at: "2026-04-08T00:00:00+00:00"
+updated_at: "2026-04-08T00:00:00+00:00"

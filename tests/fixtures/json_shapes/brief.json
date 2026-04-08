@@ -1,0 +1,14 @@
+{
+  "_description": "Expected JSON output shape for: spine brief --target <agent> --json",
+  "_command": "spine brief --target claude|codex [--cwd <path>] --json",
+  "_exit_codes": {"0": "success", "1": "invalid target", "2": "context failure"},
+  "required_keys": ["canonical_path", "latest_path"],
+  "key_types": {
+    "canonical_path": "str",
+    "latest_path": "str"
+  },
+  "path_constraints": {
+    "canonical_path": "must end with .md and match YYYYMMDD_HHMMSS.md pattern",
+    "latest_path": "must end with latest.md"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "_description": "Expected JSON output shape for: spine check before-pr --json",
+  "_command": "spine check before-pr [--cwd <path>] --json",
+  "_exit_codes": {"0": "pass", "1": "review_recommended", "2": "context failure"},
+  "required_keys": ["result", "passed", "checks"],
+  "key_types": {
+    "result": "str",
+    "passed": "bool",
+    "checks": "list"
+  },
+  "result_values": ["pass", "review_recommended"],
+  "checks_item_keys": ["name", "status", "message"]
+}

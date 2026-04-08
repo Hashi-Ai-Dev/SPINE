@@ -1,0 +1,20 @@
+version: 1
+id: mission-0001
+title: Define active mission
+status: active
+target_user: ''
+user_problem: ''
+one_sentence_promise: ''
+success_metric:
+  type: milestone
+  value: ''
+deadline_window_days: 42
+review_cadence: weekly
+preferred_runtimes: []
+preferred_models: {}
+allowed_scope: []
+forbidden_expansions: []
+proof_requirements: []
+kill_conditions: []
+created_at: "2026-04-08T00:00:00+00:00"
+updated_at: "2026-04-08T00:00:00+00:00"

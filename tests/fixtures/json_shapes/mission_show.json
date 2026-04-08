@@ -1,0 +1,14 @@
+{
+  "_description": "Expected JSON output shape for: spine mission show --json",
+  "_command": "spine mission show [--cwd <path>] --json",
+  "_exit_codes": {"0": "success", "2": "context failure"},
+  "required_keys": ["id", "title", "status", "one_sentence_promise", "success_metric"],
+  "key_types": {
+    "id": "str",
+    "title": "str",
+    "status": "str",
+    "one_sentence_promise": "str",
+    "success_metric": "dict"
+  },
+  "status_values": ["active", "paused", "complete", "killed"]
+}

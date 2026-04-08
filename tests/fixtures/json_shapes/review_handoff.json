@@ -1,0 +1,14 @@
+{
+  "_description": "Expected JSON output shape for: spine review handoff --json",
+  "_command": "spine review handoff [--cwd <path>] [--days <n>] --json",
+  "_exit_codes": {"0": "success", "2": "context failure"},
+  "required_keys": ["mission", "recent_decisions", "recent_evidence", "drift_records", "totals"],
+  "key_types": {
+    "mission": "dict",
+    "recent_decisions": "list",
+    "recent_evidence": "list",
+    "drift_records": "list",
+    "totals": "dict"
+  },
+  "totals_keys": ["decisions", "evidence", "drift"]
+}

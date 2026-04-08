@@ -1,0 +1,11 @@
+{
+  "_description": "Expected JSON output shape for: spine drift scan --json",
+  "_command": "spine drift scan [--cwd <path>] [--against <branch>] --json",
+  "_exit_codes": {"0": "success", "2": "context failure"},
+  "required_keys": ["clean", "event_count", "severity_summary"],
+  "key_types": {
+    "clean": "bool",
+    "event_count": "int",
+    "severity_summary": "dict"
+  }
+}

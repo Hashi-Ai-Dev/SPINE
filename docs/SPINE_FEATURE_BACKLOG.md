@@ -68,6 +68,31 @@ Grouped by target milestone. Each item: title, short description, why it matters
 ### 📋 Handoff/PR-prep summary primitive (#32)
 **Description:** `spine brief handoff` — generates human-readable governance summary for PR context.
 **Why it matters:** Next operator or reviewer can understand governance state without reading raw JSONL.
+**Status:** NEXT ACTIVE — second Beta slice
+
+### 📋 Draftable governance records (#33)
+**Description:** Draft evidence/decisions with explicit operator confirm before becoming canonical.
+**Why it matters:** Reduces governance friction — provisional entries without silently mutating truth.
+**Status:** QUEUED — after #32
+
+### 📋 Local optional hook/checkpoint integration (#34)
+**Description:** `spine hooks install/list/uninstall` — opt-in pre-PR hook wiring.
+**Why it matters:** Operators who want enforcement can opt in without daemon or cloud dependency.
+**Status:** QUEUED — after #33
+
+### 📋 Mission refine draft flow (#36)
+**Description:** `spine mission refine` — explicit operator-invoked refinement producing draft mission.
+**Status:** QUEUED — Phase 3B candidate, after hook integration
+
+### 📋 Compatibility/integration guide (#37)
+**Description:** Public guide for SPINE + Claude Code / oh-my-claudecode / Superpowers layering.
+**Status:** QUEUED — Phase 3B candidate, docs-only
+
+### 📋 Deterministic validation fixtures (#38)
+**Description:** Fixture harness for repeatable command/file/contract validation.
+**Status:** QUEUED — Phase 3B candidate, after hook integration
+**Description:** `spine brief handoff` — generates human-readable governance summary for PR context.
+**Why it matters:** Next operator or reviewer can understand governance state without reading raw JSONL.
 **Status:** QUEUED — after #31
 
 ### 📋 Draftable governance records (#33)

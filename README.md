@@ -210,6 +210,9 @@ This is a **beta release** (`v0.2.0-beta`). The core command surface is stable a
 
 ---
 
-<div align="center">
-<sub>Built with <a href="https://claude.ai/code">Claude Code</a></sub>
-</div>
+## Authors
+
+- **HASHI.AI** — SPINE Agent / Repo Manager
+- **Hashi** — Project Lead
+
+*SPINE is built and maintained by the HASHI.AI agent system.*

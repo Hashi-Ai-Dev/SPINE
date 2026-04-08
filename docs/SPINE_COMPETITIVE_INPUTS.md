@@ -34,7 +34,7 @@ Generative handoff context that the next agent or reviewer can use without readi
 Draft mission generation — operator refines, confirms, it becomes canonical. Strong fit. Do NOT build mission generation that silently overwrites canonical truth. Already preserved in product direction.
 
 ### Deterministic validation harnesses
-Structured gate checks that produce consistent results. SPINE's alpha-exit validation gate matrix (Issue #25) was this. Keep the validation-first mindset for Beta milestones too.
+Structured gate checks that produce consistent, reproducible results. SPINE's alpha-exit validation gate matrix (Issue #25) demonstrated this culture. Reusable deterministic harnesses and test fixtures remain a strong-fit future candidate — validation-first mindset applies to all Beta milestones.
 
 ---
 
@@ -82,6 +82,18 @@ Automatic mission generation, automatic governance without operator input — th
 | Machine-readable contracts | Reinforced by Issues #31–#34 |
 
 ---
+
+## Compatibility and Complementarity
+
+SPINE should be highly compatible with and complementary to existing agent tools and workflows — including Claude Code, oh-my-claudecode, Superpowers, and similar systems.
+
+SPINE sits **above** those tools as a repo-native governance layer. It does not replace their execution or orchestration surfaces.
+
+**Implications:**
+- Prefer stable CLI, file, and JSON contracts that other tools can read
+- Prefer local-first integration over network or platform dependency
+- Avoid lock-in to any specific agent tool or runtime
+- Avoid duplicating orchestration or execution features those tools already do well
 
 ## Anti-Drift Rules
 

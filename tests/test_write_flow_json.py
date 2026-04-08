@@ -456,7 +456,7 @@ class TestDraftsConfirmJson:
         ])
 
         evidence_file = tmp_path / ".spine" / "evidence.jsonl"
-        lines = [l for l in evidence_file.read_text().splitlines() if l.strip()]
+        lines = [ln for ln in evidence_file.read_text().splitlines() if ln.strip()]
         assert len(lines) == 1
         record = json.loads(lines[0])
         assert record["kind"] == "test_pass"

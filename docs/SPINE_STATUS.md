@@ -1,6 +1,6 @@
 # SPINE Status
 
-**Last updated:** 2026-04-08 (blocker stabilization complete — PR #46)
+**Last updated:** 2026-04-08 (Issue #49: write-flow machine-readable consistency — beta/issue49-write-flow-machine-readable-consistency)
 **Repo:** `Hashi-Ai-Dev/SPINE`
 
 ---
@@ -41,6 +41,7 @@
 | #43 | `check before-pr` exit 1 on healthy repos | ✅ Fixed — PR #46 |
 | #44 | Hook script missing `uv run` | ✅ Fixed — PR #46 |
 | #45 | AGENTS.md template invalid commands | ✅ Fixed — PR #46 |
+| #49 | Write-flow machine-readable consistency | ✅ Done — branch beta/issue49-write-flow-machine-readable-consistency |
 
 ### Beta Feature Queue
 
@@ -49,12 +50,14 @@
 | #36 | Mission refine draft flow | 📋 Next |
 | #37 | Compatibility/integration guide | 📋 Queued |
 | #38 | Deterministic validation fixtures | 📋 Queued |
+| #50 | Before-work / start-session checkpoint | 📋 Deferred |
+| #51 | Beta-exit repeated-use proof | 📋 Deferred |
 
 ---
 
 ## Next Active Priority
 
-**Issue #36** — Mission refine draft flow. Beta blockers cleared. Resuming Beta feature queue.
+**Issue #36** — Mission refine draft flow. Beta write-flow consistency (#49) complete.
 
 ---
 

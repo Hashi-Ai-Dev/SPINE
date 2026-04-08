@@ -30,7 +30,18 @@
 
 ## Current Milestone
 
-**`Beta`** — v0.2.0-beta released. Phase 3B work begins.
+**`Beta`**
+
+**`Beta`** — v0.2.0-beta. 3 blocker regressions found in shipped features (Beta Bug Hunt audit).
+
+> ⚠️ **BLOCKERS — 3 regression issues found in shipped Beta features:**
+> - **#43** — [BUG] check before-pr exits 1 on healthy repos (A-01) — blocks #31
+> - **#44** — [BUG] hook script missing `uv run` (A-02) — blocks #34
+> - **#45** — [BUG] AGENTS.md template has invalid commands (A-06) — shipped to users
+>
+> These regressions must be fixed before more Beta features ship.
+
+ — v0.2.0-beta released. Phase 3B work begins.
 
 | # | Issue | Status |
 |---|------|--------|

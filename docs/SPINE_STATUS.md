@@ -1,6 +1,6 @@
 # SPINE Status
 
-**Last updated:** 2026-04-08 (blocker stabilization complete — PR #46)
+**Last updated:** 2026-04-08 (Issue #50 — before-work checkpoint merged, Beta polish one issue remaining)
 **Repo:** `Hashi-Ai-Dev/SPINE`
 
 ---
@@ -22,7 +22,8 @@
 | Phase 1 + 2 | ✅ Complete |
 | Alpha Exit → v0.2.0-beta | ✅ Released (2026-04-07) |
 | Beta blocker stabilization | ✅ Complete — PR #46 |
-| Beta feature queue | 📋 Active |
+| Beta core feature queue | ✅ Complete — all core issues done |
+| Beta polish queue | 🔄 Active — 1 issue remaining |
 
 ---
 
@@ -38,23 +39,26 @@
 | #32 | Handoff/PR-prep summary primitive | ✅ Done — PR #39 |
 | #33 | Draftable governance records | ✅ Done — PR #40 |
 | #34 | Local optional hook/checkpoint integration | ✅ Done — PR #41 |
+| #36 | Mission refine draft flow | ✅ Done — PR #47 |
+| #37 | Compatibility/integration guide | ✅ Done — PR #48 |
+| #38 | Deterministic validation fixtures | ✅ Done — PR #52 |
 | #43 | `check before-pr` exit 1 on healthy repos | ✅ Fixed — PR #46 |
 | #44 | Hook script missing `uv run` | ✅ Fixed — PR #46 |
 | #45 | AGENTS.md template invalid commands | ✅ Fixed — PR #46 |
+| #49 | Write-flow machine-readable consistency | ✅ Done — PR #53 |
+| #50 | Before-work / start-session governance checkpoint | ✅ Done — PR #54 |
 
-### Beta Feature Queue
+### Beta Polish Queue
 
 | # | Issue | Status |
 |---|---|---|
-| #36 | Mission refine draft flow | 📋 Next |
-| #37 | Compatibility/integration guide | 📋 Queued |
-| #38 | Deterministic validation fixtures | 📋 Queued |
+| #51 | Beta-exit proof/validation | 📋 Next — last Beta polish issue |
 
 ---
 
 ## Next Active Priority
 
-**Issue #36** — Mission refine draft flow. Beta blockers cleared. Resuming Beta feature queue.
+**Issue #51** — Beta-exit proof/validation. Only one issue remains in the Beta polish queue.
 
 ---
 

@@ -1,0 +1,19 @@
+{
+  "contract_version": "1",
+  "briefs": {
+    "claude": {
+      "latest": ".spine/briefs/claude/latest.md",
+      "last_generated_at": "2026-04-08T00:00:00+00:00"
+    },
+    "codex": {
+      "latest": ".spine/briefs/codex/latest.md",
+      "last_generated_at": "2026-04-08T00:00:00+00:00"
+    }
+  },
+  "reviews": {
+    "weekly": {
+      "latest": ".spine/reviews/latest.md",
+      "last_generated_at": "2026-04-08T00:00:00+00:00"
+    }
+  }
+}

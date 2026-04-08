@@ -2,6 +2,133 @@
 
 ---
 
+## Issue #38 — Deterministic Validation Fixtures and Contract Harness
+
+**Date:** 2026-04-08
+**Branch:** `claude/issue38-validation-fixtures-VwFXQ`
+**Issue targeted:** #38 — Beta: deterministic validation fixtures and contract harness
+
+---
+
+### Summary
+
+Adds `tests/fixtures/` — a layer of explicit, human-readable fixtures and a
+focused harness (`tests/test_fixture_contracts.py`) that validates SPINE's core
+contracts deterministically.  No new features, no framework rewrite, no runtime
+services.  Pure local pytest, compatible with CI.
+
+---
+
+### Fixture/Harness Design Chosen
+
+**Static fixture files + shape-validation harness.**
+
+- `tests/fixtures/*.yaml` / `*.json` — human-readable, version-controlled
+  specifications of expected SPINE file formats and output shapes
+- `tests/fixtures/json_shapes/*.json` — per-command JSON output shape contracts
+  (required keys + expected types)
+- `tests/test_fixture_contracts.py` — loads fixtures and validates them against
+  live commands or Pydantic models; 6 test classes, 58 tests
+
+Rationale:
+- Explicit and readable — fixtures are self-documenting
+- Low maintenance — shapes rarely change; tests fail loudly when they do
+- No magic — no snapshot sprawl, no opaque diff format
+- Deterministic in CI — pure Python, no network, no runtime services
+- Extendable — adding a new contract requires one fixture file + one test
+
+---
+
+### Contracts Now Covered
+
+| Contract Surface | Coverage |
+|---|---|
+| `mission.yaml` structure | Pydantic round-trip on both `mission_valid.yaml` and `mission_minimal.yaml` fixtures; all model fields present |
+| `artifact_manifest.json` structure | Required keys, relative paths, both briefs and reviews sections |
+| `spine doctor --json` shape | `passed`, `error_count`, `warning_count`, `issues` keys verified |
+| `spine check before-pr --json` shape | `result`, `passed`, `checks` keys; each check item has `name`, `status`, `message` |
+| `spine mission show --json` shape | `id`, `title`, `status`, `one_sentence_promise`, `success_metric` keys |
+| `spine review handoff --json` shape | `mission`, `recent_decisions`, `recent_evidence`, `drift_records`, `totals` keys |
+| `spine brief --json` shape | `canonical_path`, `latest_path` keys |
+| `spine drift scan --json` shape | `clean`, `event_count`, `severity_summary` keys |
+| Exit code contracts | 7 core scenarios: init (new/re-init/force/no-git), mission show (valid/.spine-missing), mission set (invalid enum), doctor (valid/no-.spine/), check before-pr (pass/no-.spine/), brief (valid/invalid-target/.spine-missing), review weekly, drift scan |
+| `--cwd` external-repo targeting | 5 scenarios: valid repo, uninitialized repo, non-git dir, repo isolation (2 repos), all-commands acceptance |
+
+---
+
+### Files Changed
+
+| File | Change |
+|---|---|
+| `tests/fixtures/mission_valid.yaml` | New: complete valid mission fixture |
+| `tests/fixtures/mission_minimal.yaml` | New: minimal valid mission fixture |
+| `tests/fixtures/artifact_manifest_full.json` | New: full manifest fixture (briefs + reviews) |
+| `tests/fixtures/artifact_manifest_minimal.json` | New: minimal manifest fixture |
+| `tests/fixtures/exit_codes.json` | New: exit code contract reference (all scenarios) |
+| `tests/fixtures/json_shapes/doctor.json` | New: doctor --json output shape |
+| `tests/fixtures/json_shapes/check_before_pr.json` | New: check before-pr --json output shape |
+| `tests/fixtures/json_shapes/mission_show.json` | New: mission show --json output shape |
+| `tests/fixtures/json_shapes/review_handoff.json` | New: review handoff --json output shape |
+| `tests/fixtures/json_shapes/brief.json` | New: brief --json output shape |
+| `tests/fixtures/json_shapes/drift_scan.json` | New: drift scan --json output shape |
+| `tests/test_fixture_contracts.py` | New: 58-test fixture contract harness |
+| `docs/SPINE_STATUS.md` | Narrow update — #38 marked done |
+| `docs/SPINE_FEATURE_BACKLOG.md` | Narrow update — #38 marked done |
+| `docs/SPINE_BETA_IMPLEMENTATION_REPORT.md` | This file (updated) |
+
+---
+
+### Test Results
+
+```
+58 focused tests added (tests/test_fixture_contracts.py)
+436 total tests pass
+0 failures
+```
+
+Focused tests cover:
+- Fixture file integrity (all files parse, required keys present)
+- mission.yaml Pydantic round-trip (valid + minimal fixtures)
+- mission_valid.yaml has all MissionModel fields
+- artifact_manifest full fixture has contract_version, relative paths, required keys
+- artifact_manifest minimal fixture structure
+- Live brief/review manifest matches fixture shape
+- JSON output shape for: doctor, check before-pr, mission show, review handoff, brief, drift scan
+- check before-pr checks[] items have name/status/message
+- review handoff totals keys
+- Exit code 0: init (new), init --force, mission show (valid), check before-pr (with evidence+decisions), brief (valid), review weekly, drift scan
+- Exit code 1: mission set (invalid enum), doctor (no .spine/), check before-pr (no .spine/), brief (invalid target)
+- Exit code 2: init (no git), mission show (no .spine/), brief (no .spine/), review weekly (no git), drift scan (no git)
+- Exit code 3: init (already initialized)
+- --cwd points to valid repo succeeds from different cwd
+- --cwd to uninitialized repo exits 2
+- --cwd to non-git dir exits 2
+- Two repos initialized with --cwd remain isolated
+- All 7 core commands accept --cwd on a valid repo
+
+---
+
+### SPINE Governance
+
+- `spine decision add` — recorded rationale for Issue #38
+- `spine evidence add` — logged implementation work (58 tests, 436 total passing)
+- `spine review weekly --recommendation continue` — weekly review generated
+
+---
+
+### What Was Explicitly Deferred
+
+| Item | Issue | Status |
+|---|---|---|
+| Concurrent command safety | — | Not in scope for fixture harness |
+| Large file/repo performance | — | Not in scope for fixture harness |
+| Hook execution in real git workflow | — | Smoke tested in existing test_hooks.py |
+| Generalized snapshot testing | — | Explicitly excluded per Issue #38 |
+| JSONL atomicity/corruption recovery | — | Not in scope |
+| Beta-exit proof/reporting | — | Later work |
+
+---
+
 ## Issue #36 — Mission Refine Draft Flow
 
 **Date:** 2026-04-08

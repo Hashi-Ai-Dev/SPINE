@@ -35,9 +35,12 @@
 | # | Issue | Status |
 |---|------|--------|
 | #31 | Beta: `spine check before-pr` — preflight checkpoint | ✅ Done — implemented in PR #35 |
-| #32 | Beta: handoff/PR-prep summary primitive | 📋 Queued |
+| #32 | Beta: handoff/PR-prep summary primitive | 📋 Next |
 | #33 | Beta: draftable governance records | 📋 Queued |
-| #34 | Beta: local optional hook/checkpoint integration | 📋 Queued |rtial) |
+| #34 | Beta: local optional hook/checkpoint integration | 📋 Queued |
+| #36 | Beta: mission refine draft flow | 📋 Queued |
+| #37 | Beta: compatibility/integration guide | 📋 Queued |
+| #38 | Beta: deterministic validation fixtures | 📋 Queued |rtial) |
 
 ---
 

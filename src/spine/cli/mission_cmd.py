@@ -241,7 +241,7 @@ def mission_refine(
     except ValueError:
         rel_path = str(result.draft_path)
 
-    console.print(f"[bold green]Mission draft created[/bold green] (non-canonical)")
+    console.print("[bold green]Mission draft created[/bold green] (non-canonical)")
     console.print(f"  Draft ID:   [yellow]{result.draft_id}[/yellow]")
     console.print(f"  Draft file: {rel_path}")
     console.print(f"  Title:      {result.mission.title}")
@@ -293,7 +293,7 @@ def mission_confirm(
     console.print(f"  Status:     {mission.status}")
     console.print(f"  Updated at: {mission.updated_at}")
     console.print(f"  Promoted from draft: {draft_id}")
-    console.print(f"  Canonical: .spine/mission.yaml")
+    console.print("  Canonical: .spine/mission.yaml")
 
 
 @mission_app.command("drafts", help="List pending mission drafts in .spine/drafts/missions/.")

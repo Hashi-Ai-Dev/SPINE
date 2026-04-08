@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import os
+import re
 from pathlib import Path
 
 from typer.testing import CliRunner
@@ -11,6 +12,11 @@ from typer.testing import CliRunner
 from spine.main import app
 
 runner = CliRunner()
+
+
+def _strip_ansi(text: str) -> str:
+    """Remove ANSI escape codes from text (Rich may colorize help output in CI)."""
+    return re.sub(r"\x1b\[[0-9;]*m", "", text)
 
 
 # ---------------------------------------------------------------------------
@@ -56,9 +62,10 @@ def test_before_pr_help() -> None:
     """spine check before-pr --help shows expected info."""
     result = runner.invoke(app, ["check", "before-pr", "--help"])
     assert result.exit_code == 0, result.output
-    assert "before-pr" in result.output
-    assert "--cwd" in result.output
-    assert "--json" in result.output
+    plain = _strip_ansi(result.output)
+    assert "before-pr" in plain
+    assert "--cwd" in plain
+    assert "--json" in plain
 
 
 # ---------------------------------------------------------------------------

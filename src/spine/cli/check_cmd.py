@@ -12,7 +12,7 @@ from rich.table import Table
 
 from spine.cli.app import app, resolve_roots, EXIT_OK, EXIT_VALIDATION, EXIT_CONTEXT
 from spine.services.check_service import CheckService, BeforePrResult
-from spine.utils.paths import get_current_branch, get_default_branch, format_context_line, GitRepoNotFoundError
+from spine.utils.paths import get_current_branch, get_default_branch, format_context_line
 
 console = Console()
 
@@ -66,7 +66,7 @@ def check_before_pr(
     """
     try:
         repo_root, spine_root = resolve_roots(cwd)
-    except (GitRepoNotFoundError, FileNotFoundError, Exception) as exc:
+    except Exception as exc:
         if json_output:
             print(json.dumps({"error": str(exc), "exit_code": EXIT_CONTEXT}, indent=2))
         else:

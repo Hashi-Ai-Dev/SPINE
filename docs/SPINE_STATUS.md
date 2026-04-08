@@ -49,18 +49,6 @@
 | #36 | Mission refine draft flow | 📋 Next |
 | #37 | Compatibility/integration guide | 📋 Queued |
 | #38 | Deterministic validation fixtures | 📋 Queued |
-| #49 | Machine-readable consistency for write flows | 📋 Queued |
-| #50 | Before-work / start-session governance checkpoint | 📋 Queued |
-| #51 | Beta-exit repeated-use proof / governed workflow validation | 📋 Queued |
-
-## Post-Beta Exit Criteria
-
-Beta should exit when:
-- Agent use is smooth enough
-- Discipline tax is meaningfully reduced
-- Repeated governed workflows are proven
-- Machine-readable contracts are strong enough for tool use
-- The repo-native governance model still holds
 
 ---
 

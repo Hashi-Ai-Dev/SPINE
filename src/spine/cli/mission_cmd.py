@@ -187,6 +187,11 @@ def mission_refine(
     forbidden_expansions: str | None = typer.Option(None, "--forbid", help="Proposed comma-separated forbidden expansions"),
     proof_requirements: str | None = typer.Option(None, "--proof", help="Proposed comma-separated proof requirements"),
     kill_conditions: str | None = typer.Option(None, "--kill", help="Proposed comma-separated kill conditions"),
+    json_output: bool = typer.Option(
+        False,
+        "--json",
+        help="Output result as JSON (machine-readable). Exit codes still apply.",
+    ),
 ) -> None:
     """
     Create a draft mission refinement at .spine/drafts/missions/<timestamp>.yaml.
@@ -206,7 +211,10 @@ def mission_refine(
     try:
         repo_root, spine_root = resolve_roots(cwd)
     except Exception as exc:
-        console.print(f"[bold red]Error:[/bold red] {exc}")
+        if json_output:
+            print(json.dumps({"error": str(exc), "exit_code": EXIT_CONTEXT}, indent=2))
+        else:
+            console.print(f"[bold red]Error:[/bold red] {exc}")
         raise typer.Exit(EXIT_CONTEXT)
 
     def parse_list(s: str | None) -> list[str] | None:
@@ -230,16 +238,32 @@ def mission_refine(
             kill_conditions=parse_list(kill_conditions),
         )
     except MissionNotFoundError as exc:
-        console.print(f"[bold red]Error:[/bold red] {exc}")
+        if json_output:
+            print(json.dumps({"error": str(exc), "exit_code": EXIT_CONTEXT}, indent=2))
+        else:
+            console.print(f"[bold red]Error:[/bold red] {exc}")
         raise typer.Exit(EXIT_CONTEXT)
     except MissionValidationError as exc:
-        console.print(f"[bold red]Validation error:[/bold red] {exc}")
+        if json_output:
+            print(json.dumps({"error": str(exc), "exit_code": EXIT_VALIDATION}, indent=2))
+        else:
+            console.print(f"[bold red]Validation error:[/bold red] {exc}")
         raise typer.Exit(EXIT_VALIDATION)
 
     try:
         rel_path = result.draft_path.relative_to(repo_root).as_posix()
     except ValueError:
         rel_path = str(result.draft_path)
+
+    if json_output:
+        data = {
+            "ok": True,
+            "draft_id": result.draft_id,
+            "draft_path": rel_path,
+            **result.mission.model_dump(mode="python"),
+        }
+        print(json.dumps(data, indent=2, default=str))
+        return
 
     console.print("[bold green]Mission draft created[/bold green] (non-canonical)")
     console.print(f"  Draft ID:   [yellow]{result.draft_id}[/yellow]")
@@ -259,6 +283,11 @@ def mission_confirm(
         "--cwd",
         help="Target repository path. Overrides SPINE_ROOT. Precedence: --cwd > SPINE_ROOT > cwd.",
     ),
+    json_output: bool = typer.Option(
+        False,
+        "--json",
+        help="Output result as JSON (machine-readable). Exit codes still apply.",
+    ),
 ) -> None:
     """
     Promote a mission draft to canonical .spine/mission.yaml.
@@ -276,18 +305,32 @@ def mission_confirm(
     try:
         repo_root, spine_root = resolve_roots(cwd)
     except Exception as exc:
-        console.print(f"[bold red]Error:[/bold red] {exc}")
+        if json_output:
+            print(json.dumps({"error": str(exc), "exit_code": EXIT_CONTEXT}, indent=2))
+        else:
+            console.print(f"[bold red]Error:[/bold red] {exc}")
         raise typer.Exit(EXIT_CONTEXT)
 
     service = MissionService(repo_root, spine_root=spine_root)
     try:
         mission = service.confirm_draft(draft_id)
     except MissionDraftNotFoundError as exc:
-        console.print(f"[bold red]Mission draft not found:[/bold red] {exc}")
+        if json_output:
+            print(json.dumps({"error": str(exc), "exit_code": EXIT_VALIDATION}, indent=2))
+        else:
+            console.print(f"[bold red]Mission draft not found:[/bold red] {exc}")
         raise typer.Exit(EXIT_VALIDATION)
     except MissionValidationError as exc:
-        console.print(f"[bold red]Validation error:[/bold red] {exc}")
+        if json_output:
+            print(json.dumps({"error": str(exc), "exit_code": EXIT_VALIDATION}, indent=2))
+        else:
+            console.print(f"[bold red]Validation error:[/bold red] {exc}")
         raise typer.Exit(EXIT_VALIDATION)
+
+    if json_output:
+        data = {"ok": True, "draft_id": draft_id, **mission.model_dump(mode="python")}
+        print(json.dumps(data, indent=2, default=str))
+        return
 
     console.print(f"[bold green]Mission draft confirmed:[/bold green] {mission.title}")
     console.print(f"  Status:     {mission.status}")
@@ -303,6 +346,11 @@ def mission_drafts_list(
         "--cwd",
         help="Target repository path. Overrides SPINE_ROOT. Precedence: --cwd > SPINE_ROOT > cwd.",
     ),
+    json_output: bool = typer.Option(
+        False,
+        "--json",
+        help="Output result as JSON (machine-readable). Exit codes still apply.",
+    ),
 ) -> None:
     """
     List pending mission drafts under .spine/drafts/missions/.
@@ -317,11 +365,18 @@ def mission_drafts_list(
     try:
         repo_root, spine_root = resolve_roots(cwd)
     except Exception as exc:
-        console.print(f"[bold red]Error:[/bold red] {exc}")
+        if json_output:
+            print(json.dumps({"error": str(exc), "exit_code": EXIT_CONTEXT}, indent=2))
+        else:
+            console.print(f"[bold red]Error:[/bold red] {exc}")
         raise typer.Exit(EXIT_CONTEXT)
 
     service = MissionService(repo_root, spine_root=spine_root)
     drafts = service.list_mission_drafts()
+
+    if json_output:
+        print(json.dumps({"ok": True, "count": len(drafts), "drafts": drafts}, indent=2, default=str))
+        return
 
     if not drafts:
         console.print("[dim]No pending mission drafts.[/dim]")

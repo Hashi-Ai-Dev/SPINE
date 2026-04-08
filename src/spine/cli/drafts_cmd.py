@@ -11,6 +11,7 @@ Usage:
 
 from __future__ import annotations
 
+import json
 from pathlib import Path
 
 import typer
@@ -35,21 +36,37 @@ def drafts_list(
         "--cwd",
         help="Target repository path. Overrides SPINE_ROOT. Precedence: --cwd > SPINE_ROOT > cwd.",
     ),
+    json_output: bool = typer.Option(
+        False,
+        "--json",
+        help="Output result as JSON (machine-readable). Exit codes still apply.",
+    ),
 ) -> None:
     """
     List all pending draft governance records in .spine/drafts/.
 
     Drafts are provisional records not yet promoted to canonical state.
     Use 'spine drafts confirm <draft_id>' to promote a draft.
+
+    Exit codes:
+      0  Success (even if no drafts)
+      2  Context failure — repo not found
     """
     try:
         repo_root, spine_root = resolve_roots(cwd)
     except Exception as exc:
-        console.print(f"[bold red]Error:[/bold red] {exc}")
+        if json_output:
+            print(json.dumps({"error": str(exc), "exit_code": EXIT_CONTEXT}, indent=2))
+        else:
+            console.print(f"[bold red]Error:[/bold red] {exc}")
         raise typer.Exit(EXIT_CONTEXT)
 
     service = DraftService(repo_root, spine_root=spine_root)
     drafts = service.list_drafts()
+
+    if json_output:
+        print(json.dumps({"ok": True, "count": len(drafts), "drafts": drafts}, indent=2))
+        return
 
     if not drafts:
         console.print("[dim]No pending drafts.[/dim]")
@@ -79,6 +96,11 @@ def drafts_confirm(
         "--cwd",
         help="Target repository path. Overrides SPINE_ROOT. Precedence: --cwd > SPINE_ROOT > cwd.",
     ),
+    json_output: bool = typer.Option(
+        False,
+        "--json",
+        help="Output result as JSON (machine-readable). Exit codes still apply.",
+    ),
 ) -> None:
     """
     Promote a draft record to canonical state.
@@ -88,26 +110,44 @@ def drafts_confirm(
     then removes the draft file.
 
     This is an explicit operator action. Promotion is never silent or automatic.
+
+    Exit codes:
+      0  Promoted successfully
+      1  Draft not found or malformed
+      2  Context failure — repo not found
     """
     try:
         repo_root, spine_root = resolve_roots(cwd)
     except Exception as exc:
-        console.print(f"[bold red]Error:[/bold red] {exc}")
+        if json_output:
+            print(json.dumps({"error": str(exc), "exit_code": EXIT_CONTEXT}, indent=2))
+        else:
+            console.print(f"[bold red]Error:[/bold red] {exc}")
         raise typer.Exit(EXIT_CONTEXT)
 
     service = DraftService(repo_root, spine_root=spine_root)
     try:
         record = service.confirm(draft_id)
         record_type = "evidence" if "kind" in record else "decision"
-        if record_type == "evidence":
-            console.print(f"[bold green]Draft confirmed:[/bold green] [{record.get('kind', '?')}] {record.get('description', '') or '(no description)'}")
+        if json_output:
+            data = {"ok": True, "draft_id": draft_id, "record_type": record_type, **record}
+            print(json.dumps(data, indent=2))
         else:
-            console.print(f"[bold green]Draft confirmed:[/bold green] {record.get('title', '?')}")
-        console.print(f"  Promoted from draft: {draft_id}")
-        console.print(f"  Added to canonical: .spine/{'evidence.jsonl' if record_type == 'evidence' else 'decisions.jsonl'}")
+            if record_type == "evidence":
+                console.print(f"[bold green]Draft confirmed:[/bold green] [{record.get('kind', '?')}] {record.get('description', '') or '(no description)'}")
+            else:
+                console.print(f"[bold green]Draft confirmed:[/bold green] {record.get('title', '?')}")
+            console.print(f"  Promoted from draft: {draft_id}")
+            console.print(f"  Added to canonical: .spine/{'evidence.jsonl' if record_type == 'evidence' else 'decisions.jsonl'}")
     except DraftNotFoundError as exc:
-        console.print(f"[bold red]Draft not found:[/bold red] {exc}")
+        if json_output:
+            print(json.dumps({"error": str(exc), "exit_code": EXIT_VALIDATION}, indent=2))
+        else:
+            console.print(f"[bold red]Draft not found:[/bold red] {exc}")
         raise typer.Exit(EXIT_VALIDATION)
     except DraftError as exc:
-        console.print(f"[bold red]Draft error:[/bold red] {exc}")
+        if json_output:
+            print(json.dumps({"error": str(exc), "exit_code": EXIT_VALIDATION}, indent=2))
+        else:
+            console.print(f"[bold red]Draft error:[/bold red] {exc}")
         raise typer.Exit(EXIT_VALIDATION)

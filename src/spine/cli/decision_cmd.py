@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 from pathlib import Path
 
 import typer
@@ -35,6 +36,11 @@ def decision_add(
         "--draft",
         help="[Beta] Save as a draft under .spine/drafts/ instead of appending to decisions.jsonl. Use 'spine drafts confirm <id>' to promote.",
     ),
+    json_output: bool = typer.Option(
+        False,
+        "--json",
+        help="Output result as JSON (machine-readable). Exit codes still apply.",
+    ),
 ) -> None:
     """
     Add a decision record to .spine/decisions.jsonl.
@@ -43,11 +49,19 @@ def decision_add(
     Optional: alternatives (comma-separated list).
 
     Use --draft to save provisionally to .spine/drafts/ without touching canonical state.
+
+    Exit codes:
+      0  Success
+      1  Validation failure — empty required field
+      2  Context failure   — repo not found or .spine/ missing
     """
     try:
         repo_root, spine_root = resolve_roots(cwd)
     except Exception as exc:
-        console.print(f"[bold red]Error:[/bold red] {exc}")
+        if json_output:
+            print(json.dumps({"error": str(exc), "exit_code": EXIT_CONTEXT}, indent=2))
+        else:
+            console.print(f"[bold red]Error:[/bold red] {exc}")
         raise typer.Exit(EXIT_CONTEXT)
 
     def parse_list(s: str | None) -> list[str] | None:
@@ -64,13 +78,17 @@ def decision_add(
                 decision=decision,
                 alternatives=parse_list(alternatives),
             )
-            console.print(f"[bold yellow]Decision draft saved:[/bold yellow] {decision_record.title}")
-            console.print(f"  Why: {decision_record.why}")
-            console.print(f"  Decision: {decision_record.decision}")
-            if decision_record.alternatives:
-                console.print(f"  Alternatives: {', '.join(decision_record.alternatives)}")
-            console.print(f"  Draft ID: {draft_id}")
-            console.print(f"  Promote with: spine drafts confirm {draft_id}")
+            if json_output:
+                data = {"ok": True, "draft": True, "draft_id": draft_id, **decision_record.to_json()}
+                print(json.dumps(data, indent=2))
+            else:
+                console.print(f"[bold yellow]Decision draft saved:[/bold yellow] {decision_record.title}")
+                console.print(f"  Why: {decision_record.why}")
+                console.print(f"  Decision: {decision_record.decision}")
+                if decision_record.alternatives:
+                    console.print(f"  Alternatives: {', '.join(decision_record.alternatives)}")
+                console.print(f"  Draft ID: {draft_id}")
+                console.print(f"  Promote with: spine drafts confirm {draft_id}")
         else:
             decision_record = service.add(
                 title=title,
@@ -78,12 +96,19 @@ def decision_add(
                 decision=decision,
                 alternatives=parse_list(alternatives),
             )
-            console.print(f"[bold green]Decision added:[/bold green] {decision_record.title}")
-            console.print(f"  Why: {decision_record.why}")
-            console.print(f"  Decision: {decision_record.decision}")
-            if decision_record.alternatives:
-                console.print(f"  Alternatives: {', '.join(decision_record.alternatives)}")
-            console.print(f"  Created at: {decision_record.created_at}")
+            if json_output:
+                data = {"ok": True, **decision_record.to_json()}
+                print(json.dumps(data, indent=2))
+            else:
+                console.print(f"[bold green]Decision added:[/bold green] {decision_record.title}")
+                console.print(f"  Why: {decision_record.why}")
+                console.print(f"  Decision: {decision_record.decision}")
+                if decision_record.alternatives:
+                    console.print(f"  Alternatives: {', '.join(decision_record.alternatives)}")
+                console.print(f"  Created at: {decision_record.created_at}")
     except DecisionValidationError as exc:
-        console.print(f"[bold red]Validation error:[/bold red] {exc}")
+        if json_output:
+            print(json.dumps({"error": str(exc), "exit_code": EXIT_VALIDATION}, indent=2))
+        else:
+            console.print(f"[bold red]Validation error:[/bold red] {exc}")
         raise typer.Exit(EXIT_VALIDATION)

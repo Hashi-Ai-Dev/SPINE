@@ -342,3 +342,141 @@ Doctor *warnings* now produce a `pass` CheckItem with an advisory note.
 ```
 352 passed
 ```
+
+---
+
+## Issue #49 — Write-Flow Machine-Readable Consistency
+
+**Date:** 2026-04-08
+**Branch:** `beta/issue49-write-flow-machine-readable-consistency`
+**Issue targeted:** #49 — Beta: machine-readable consistency for governance write flows
+
+---
+
+### Summary
+
+Audited all write-oriented CLI commands for JSON output consistency.
+Added `--json` flag to 7 write-oriented commands with deterministic,
+stable output shapes. Exit code contracts unchanged. No hidden behavior added.
+
+---
+
+### Audit Results
+
+| Command | Pre-#49 JSON | Gap Found | Action |
+|---|---|---|---|
+| `spine evidence add` | None | Yes — agents need machine-readable write confirmation | Added `--json` |
+| `spine decision add` | None | Yes — agents need machine-readable write confirmation | Added `--json` |
+| `spine drafts list` | None | Yes — list surface should be machine-readable | Added `--json` |
+| `spine drafts confirm` | None | Yes — confirm surface should be machine-readable | Added `--json` |
+| `spine mission refine` | None | Yes — draft creation needs stable output for agent use | Added `--json` |
+| `spine mission confirm` | None | Yes — draft promotion needs stable output | Added `--json` |
+| `spine mission drafts` | None | Yes — list surface should be machine-readable | Added `--json` |
+| Exit codes (all write cmds) | Already consistent | No gap | No change needed |
+| `--cwd` support | Already consistent | No gap | No change needed |
+
+---
+
+### JSON Output Shapes
+
+All write commands follow the established SPINE pattern from `mission show` / `brief`:
+- Success: `{"ok": true, ...record_fields...}`
+- Draft mode: `{"ok": true, "draft": true, "draft_id": "...", ...record_fields...}`
+- Error: `{"error": "...", "exit_code": N}`
+
+Specific shapes:
+
+**`spine evidence add --json`**
+```json
+{"ok": true, "kind": "commit", "description": "...", "evidence_url": "...", "created_at": "..."}
+```
+
+**`spine evidence add --draft --json`**
+```json
+{"ok": true, "draft": true, "draft_id": "evidence-20260408T...", "kind": "commit", ...}
+```
+
+**`spine decision add --json`**
+```json
+{"ok": true, "title": "...", "why": "...", "decision": "...", "alternatives": [...], "created_at": "..."}
+```
+
+**`spine drafts list --json`**
+```json
+{"ok": true, "count": 1, "drafts": [{"draft_id": "...", "_record_type": "evidence", ...}]}
+```
+
+**`spine drafts confirm <id> --json`**
+```json
+{"ok": true, "draft_id": "...", "record_type": "evidence", "kind": "...", "description": "..."}
+```
+
+**`spine mission refine --json`**
+```json
+{"ok": true, "draft_id": "mission-...", "draft_path": ".spine/drafts/missions/...", "title": "...", ...}
+```
+
+**`spine mission confirm <id> --json`**
+```json
+{"ok": true, "draft_id": "...", "title": "...", "status": "...", "updated_at": "..."}
+```
+
+**`spine mission drafts --json`**
+```json
+{"ok": true, "count": 1, "drafts": [{"draft_id": "...", "title": "...", "status": "..."}]}
+```
+
+---
+
+### Files Changed
+
+| File | Change |
+|---|---|
+| `src/spine/cli/evidence_cmd.py` | Added `--json` option; JSON success/error output; updated docstring with exit codes |
+| `src/spine/cli/decision_cmd.py` | Added `--json` option; JSON success/error output; updated docstring with exit codes |
+| `src/spine/cli/drafts_cmd.py` | Added `--json` to both `list` and `confirm`; JSON output on all paths |
+| `src/spine/cli/mission_cmd.py` | Added `--json` to `refine`, `confirm`, `drafts` subcommands |
+| `tests/test_write_flow_json.py` | New: 37 focused contract tests for all write-flow JSON surfaces |
+| `docs/SPINE_STATUS.md` | Narrow update — #49 marked done |
+| `docs/SPINE_FEATURE_BACKLOG.md` | Narrow update — #49 marked done, #50/#51 added as deferred |
+| `docs/SPINE_BETA_IMPLEMENTATION_REPORT.md` | This section |
+
+---
+
+### Test Results
+
+```
+37 new focused contract tests (tests/test_write_flow_json.py)
+473 total tests pass
+0 failures
+```
+
+Focused tests cover:
+- `evidence add --json`: success shape, draft shape, url field, context failure, stdout purity
+- `decision add --json`: success shape, draft shape, alternatives field, validation failure, context failure, stdout purity
+- `drafts list --json`: empty shape, with evidence draft, with decision draft, context failure, stdout purity
+- `drafts confirm --json`: evidence success, decision success, not-found exits 1, context failure, canonical promotion verified
+- `mission refine --json`: success shape, stdout purity, context failure
+- `mission confirm --json`: success shape (with round-trip), not-found exits 1, context failure
+- `mission drafts --json`: empty shape, with draft, context failure, stdout purity
+- Exit code contract: evidence add 0/2, decision add 0/1, drafts list 2, drafts confirm 1
+
+---
+
+### SPINE Governance
+
+- `spine decision add` — recorded rationale for Issue #49
+- `spine evidence add` — logged implementation work
+- `spine review weekly --recommendation continue` — weekly review generated
+
+---
+
+### What Was Explicitly Deferred
+
+| Item | Issue | Reason |
+|---|---|---|
+| Before-work / start-session checkpoint | #50 | Out of scope for #49 |
+| Beta-exit repeated-use proof | #51 | Out of scope for #49 |
+| New governance command surfaces | — | Not in scope — write-path consistency only |
+| General snapshot testing overhaul | — | Explicitly excluded |
+| Cloud/webhook/platform features | — | Explicitly excluded |

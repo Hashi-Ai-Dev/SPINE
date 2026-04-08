@@ -1,6 +1,6 @@
 # SPINE Status
 
-**Last updated:** 2026-04-08 (Issue #36: mission refine draft flow — complete)
+**Last updated:** 2026-04-08 (blocker stabilization complete — PR #46)
 **Repo:** `Hashi-Ai-Dev/SPINE`
 
 ---
@@ -41,20 +41,20 @@
 | #43 | `check before-pr` exit 1 on healthy repos | ✅ Fixed — PR #46 |
 | #44 | Hook script missing `uv run` | ✅ Fixed — PR #46 |
 | #45 | AGENTS.md template invalid commands | ✅ Fixed — PR #46 |
-| #36 | Mission refine draft flow | ✅ Done — PR #47 |
 
 ### Beta Feature Queue
 
 | # | Issue | Status |
 |---|---|---|
-| #37 | Compatibility/integration guide | 📋 Next |
+| #36 | Mission refine draft flow | 📋 Next |
+| #37 | Compatibility/integration guide | 📋 Queued |
 | #38 | Deterministic validation fixtures | 📋 Queued |
 
 ---
 
 ## Next Active Priority
 
-**Issue #37** — Compatibility/integration guide. Issue #36 complete.
+**Issue #36** — Mission refine draft flow. Beta blockers cleared. Resuming Beta feature queue.
 
 ---
 

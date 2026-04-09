@@ -467,3 +467,166 @@ def test_resolve_roots_without_spiner_root_uses_cwd_repo(tmp_path: Path) -> None
 
     assert result.exit_code == 0, result.output
     assert "Local Mission" in result.output
+
+
+# ---------------------------------------------------------------------------
+# --json output tests (Issue #59)
+# ---------------------------------------------------------------------------
+
+
+def run_drift_scan_json(tmp_path: Path, *extra_args: str) -> tuple[int, str]:
+    """Run drift scan with --json and return (exit_code, stdout)."""
+    original = os.getcwd()
+    try:
+        os.chdir(tmp_path)
+        result = runner.invoke(app, ["drift", "scan", "--json", *extra_args])
+    finally:
+        os.chdir(original)
+    return result.exit_code, result.output
+
+
+def test_drift_scan_json_clean_output_shape(tmp_path: Path) -> None:
+    """--json with no drift produces valid JSON with required keys and clean=True."""
+    make_real_git_repo(tmp_path)
+    run_init(tmp_path)
+
+    exit_code, stdout = run_drift_scan_json(tmp_path)
+
+    assert exit_code == 0, stdout
+    data = json.loads(stdout)
+
+    # Required keys
+    assert "clean" in data
+    assert "event_count" in data
+    assert "severity_summary" in data
+    assert "events" in data
+    assert "repo" in data
+    assert "branch" in data
+    assert "scanned_at" in data
+
+    # Values for clean scan
+    assert data["clean"] is True
+    assert data["event_count"] == 0
+    assert data["events"] == []
+    assert data["severity_summary"] == {"low": 0, "medium": 0, "high": 0}
+
+
+def test_drift_scan_json_with_forbidden_file(tmp_path: Path) -> None:
+    """--json with a staged forbidden file produces clean=False and events with correct shape."""
+    make_real_git_repo(tmp_path)
+    run_init(tmp_path)
+
+    (tmp_path / "ui").mkdir()
+    (tmp_path / "ui" / "dashboard.py").write_text("from flask import render_template\n", encoding="utf-8")
+    subprocess.run(["git", "add", "ui/dashboard.py"], cwd=tmp_path, capture_output=True)
+
+    exit_code, stdout = run_drift_scan_json(tmp_path)
+
+    assert exit_code == 0, stdout
+    data = json.loads(stdout)
+
+    assert data["clean"] is False
+    assert data["event_count"] > 0
+    assert len(data["events"]) == data["event_count"]
+
+    # Each event must have the required fields
+    for event in data["events"]:
+        assert "severity" in event
+        assert "category" in event
+        assert "description" in event
+        assert "file_path" in event
+        assert event["severity"] in ("low", "medium", "high")
+
+    # Should have a high-severity forbidden_expansion event
+    high_events = [e for e in data["events"] if e["severity"] == "high"]
+    assert len(high_events) > 0
+    assert any(e["category"] == "forbidden_expansion" for e in high_events)
+
+
+def test_drift_scan_json_severity_summary_counts(tmp_path: Path) -> None:
+    """--json severity_summary reflects actual event counts."""
+    make_real_git_repo(tmp_path)
+    run_init(tmp_path)
+
+    (tmp_path / "ui").mkdir()
+    (tmp_path / "ui" / "dashboard.py").write_text("from flask import render_template\n", encoding="utf-8")
+    subprocess.run(["git", "add", "ui/dashboard.py"], cwd=tmp_path, capture_output=True)
+
+    exit_code, stdout = run_drift_scan_json(tmp_path)
+
+    assert exit_code == 0, stdout
+    data = json.loads(stdout)
+
+    summary = data["severity_summary"]
+    assert "low" in summary
+    assert "medium" in summary
+    assert "high" in summary
+
+    # The summary totals must match event count
+    total = summary["low"] + summary["medium"] + summary["high"]
+    assert total == data["event_count"]
+
+    # Must have at least one high-severity event
+    assert summary["high"] > 0
+
+
+def test_drift_scan_json_context_failure_no_git_repo(tmp_path: Path) -> None:
+    """--json on a non-git directory outputs JSON error and exits 2."""
+    original = os.getcwd()
+    try:
+        os.chdir(tmp_path)
+        result = runner.invoke(app, ["drift", "scan", "--json"])
+    finally:
+        os.chdir(original)
+
+    assert result.exit_code == 2, result.output
+    data = json.loads(result.output)
+    assert "error" in data
+    assert "exit_code" in data
+    assert data["exit_code"] == 2
+
+
+def test_drift_scan_json_no_human_output(tmp_path: Path) -> None:
+    """--json produces only parseable JSON — no Rich markup or human text mixed in."""
+    make_real_git_repo(tmp_path)
+    run_init(tmp_path)
+
+    exit_code, stdout = run_drift_scan_json(tmp_path)
+
+    assert exit_code == 0, stdout
+    # Must parse cleanly — if human text is mixed in, this raises
+    json.loads(stdout)
+
+
+def test_drift_scan_json_with_cwd(tmp_path: Path) -> None:
+    """--json --cwd <path> works without changing directory."""
+    make_real_git_repo(tmp_path)
+    run_init(tmp_path)
+
+    result = runner.invoke(app, ["drift", "scan", "--json", "--cwd", str(tmp_path)])
+
+    assert result.exit_code == 0, result.output
+    data = json.loads(result.output)
+    assert "clean" in data
+    assert data["clean"] is True
+
+
+def test_drift_scan_json_against_branch(tmp_path: Path) -> None:
+    """--json --against main reports drift committed on a feature branch vs main."""
+    make_real_git_repo_on_main(tmp_path)
+    run_init(tmp_path)
+
+    # Create and stay on feature branch with a committed forbidden file
+    subprocess.run(["git", "checkout", "-b", "feature/ui-add"], cwd=tmp_path, capture_output=True)
+    (tmp_path / "ui").mkdir()
+    (tmp_path / "ui" / "dashboard.py").write_text("from flask import render_template\n", encoding="utf-8")
+    subprocess.run(["git", "add", "."], cwd=tmp_path, capture_output=True)
+    subprocess.run(["git", "commit", "-m", "Add ui/dashboard"], cwd=tmp_path, capture_output=True)
+
+    # Run from the feature branch comparing against main
+    exit_code, stdout = run_drift_scan_json(tmp_path, "--against", "main")
+
+    assert exit_code == 0, stdout
+    data = json.loads(stdout)
+    assert data["clean"] is False
+    assert data["event_count"] > 0

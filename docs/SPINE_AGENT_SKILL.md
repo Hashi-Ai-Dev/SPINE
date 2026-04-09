@@ -15,7 +15,9 @@ SPINE keeps agents aligned to a defined mission. It provides:
 - **Proof trail** — evidence and decisions that were made
 - **Drift detection** — git-native scope drift scanning
 
-Governance data lives in `.spine/*.jsonl` files (committed to git) and generated outputs in `.spine/briefs/`, `.spine/reviews/` (gitignored — run `spine brief generate` or `spine review weekly` to produce them).
+Governance data lives in `.spine/*.jsonl` files (committed to git where repo policy allows) and generated outputs in `.spine/briefs/`, `.spine/reviews/` (gitignored — run `uv run spine brief --target claude` or `uv run spine review weekly` to produce them).
+
+**Cross-repo targeting:** SPINE can target a different repo via `--cwd /path/to/repo` or `SPINE_ROOT=/path/to/other/repo`. Use this when governing a sub-repo or a repo that is not the current working directory.
 
 ## When to Use This Skill
 
@@ -23,41 +25,41 @@ Use SPINE when:
 - Starting work in a new or unfamiliar repo
 - A decision was made that should be recorded
 - Evidence of work was produced that should be logged
-- Unsure whether something is in scope — run `spine drift scan`
-- Before opening a PR — run `spine check before-pr`
-- Starting a session — run `spine check before-work`
+- Unsure whether something is in scope — run `uv run spine drift scan`
+- Before opening a PR — run `uv run spine check before-pr`
+- Starting a session — run `uv run spine check before-work`
 
 ## First-Contact Flow
 
-\`\`\`bash
+```bash
 # 1. Check governance health
-spine doctor
+uv run spine doctor
 
 # 2. Read the current mission
-spine mission show
+uv run spine mission show
 
 # 3. If no mission exists, ask the operator to run:
-spine mission set --title "..." --goal "..."
-\`\`\`
+uv run spine mission set --title "..." --goal "..."
+```
 
 ## Standard Working Loop
 
-\`\`\`bash
+```bash
 # At start of session
-spine check before-work
-spine brief --target claude   # generate context brief for this session
+uv run spine check before-work
+uv run spine brief --target claude   # generate context brief for this session
 
 # During work — record decisions and evidence
-spine decision add --title "Chose X over Y because..." --rationale "..."
-spine evidence add --kind commit --description "Implemented X"
+uv run spine decision add --title "Chose X over Y" --rationale "..."
+uv run spine evidence add --kind commit --description "Implemented X"
 
 # When unsure about scope
-spine drift scan
-spine drift scan --json    # machine-readable
+uv run spine drift scan
+uv run spine drift scan --json    # machine-readable
 
 # Before PR
-spine check before-pr
-\`\`\`
+uv run spine check before-pr
+```
 
 ## When to Add a Decision
 
@@ -77,10 +79,10 @@ Record evidence when:
 
 ## What to Do If SPINE State Is Weak
 
-If `spine doctor` shows warnings or the mission is thin:
+If `uv run spine doctor` shows warnings or the mission is thin:
 
-1. Ask the operator to refine the mission: `spine mission refine`
-2. If no brief exists, generate one: `spine brief --target claude`
+1. Ask the operator to refine the mission: `uv run spine mission refine`
+2. If no brief exists, generate one: `uv run spine brief --target claude`
 3. Record any known decisions or context as evidence
 
 Do not proceed with significant work in a governance vacuum. A thin mission is better than no mission — but both are signals to the operator.
@@ -93,34 +95,35 @@ If a governance write fails because of `.gitignore`, repo policy, or workspace r
 2. Do not pretend the write succeeded
 3. Note the block in the session context so the operator can resolve it
 
-**Ephemeral outputs** (`.spine/briefs/`, `.spine/reviews/`) are gitignored by design. Governance data (decisions, evidence, drift) is in durable JSONL files and IS committed to git.
+**Ephemeral outputs** (`.spine/briefs/`, `.spine/reviews/`) are gitignored by design. Governance data (decisions, evidence, drift) is in durable JSONL files and is committed to git where repo policy allows.
 
 ## Anti-Patterns
 
-- **Do not** run `spine init` in an already-governed repo — it may reset draft state
-- **Do not** use `spine mission set` to silently overwrite a mission without operator confirmation
+- **Do not** run `uv run spine init` in an already-governed repo — it may reset draft state
+- **Do not** use `uv run spine mission set` to silently overwrite a mission without operator confirmation
 - **Do not** treat generated briefs/reviews as durable records — they are ephemeral and gitignored
-- **Do not** skip `spine check before-pr` because it feels like overhead — it catches drift before it accumulates
+- **Do not** skip `uv run spine check before-pr` because it feels like overhead — it catches drift before it accumulates
 - **Do not** add decisions or evidence retroactively with false timestamps — record what was done, when it was actually done
 
 ## Command Cheatsheet
 
 | Command | When to Use |
 |---------|-------------|
-| `spine doctor` | Check governance health |
-| `spine mission show` | Read current mission |
-| `spine mission show --json` | Machine-readable mission |
-| `spine brief --target claude` | Generate agent context brief |
-| `spine check before-work` | Start-session checkpoint |
-| `spine check before-pr` | Pre-PR checkpoint |
-| `spine drift scan` | Check for scope drift |
-| `spine drift scan --json` | Machine-readable drift |
-| `spine decision add --title "..." --rationale "..."` | Record a decision |
-| `spine decision list` | List recorded decisions |
-| `spine evidence add --kind commit --description "..."` | Record evidence |
-| `spine evidence list` | List recorded evidence |
-| `spine drafts list` | List pending drafts |
-| `spine drafts confirm <id>` | Promote a draft to canonical |
+| `uv run spine doctor` | Check governance health |
+| `uv run spine mission show` | Read current mission |
+| `uv run spine mission show --json` | Machine-readable mission |
+| `uv run spine mission set --title "..." --goal "..."` | Set or update mission |
+| `uv run spine brief --target claude` | Generate agent context brief |
+| `uv run spine check before-work` | Start-session checkpoint |
+| `uv run spine check before-pr` | Pre-PR checkpoint |
+| `uv run spine drift scan` | Check for scope drift |
+| `uv run spine drift scan --json` | Machine-readable drift |
+| `uv run spine decision add --title "..." --rationale "..."` | Record a decision |
+| `uv run spine decision list` | List recorded decisions |
+| `uv run spine evidence add --kind commit --description "..."` | Record evidence |
+| `uv run spine evidence list` | List recorded evidence |
+| `uv run spine drafts list` | List pending drafts |
+| `uv run spine drafts confirm <id>` | Promote a draft to canonical |
 
 ---
 

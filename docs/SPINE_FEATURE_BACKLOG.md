@@ -26,7 +26,7 @@ Grouped by target milestone. Each item: title, short description, why it matters
 
 ## Beta — v0.2.0-beta
 
-> ✅ Beta blocker stabilization complete (PR #46). Beta core queue complete. Beta polish active.
+> ✅ Beta core and polish complete. Beta-exit blockers remain.
 
 ### Completed Beta Issues
 
@@ -44,25 +44,28 @@ Grouped by target milestone. Each item: title, short description, why it matters
 | #45 | AGENTS.md template invalid commands | PR #46 |
 | #49 | Write-flow machine-readable consistency | PR #53 |
 | #50 | Before-work / start-session governance checkpoint | PR #54 |
+| #57 | MCP TextContent NameError | PR #61 |
+| #58 | README exit code + test count | PR #63 |
 
 ### Beta Polish Queue
 
 | # | Issue | Status |
 |---|---|---|
-| #51 | Beta-exit proof/validation | 📋 Active — last Beta polish issue |
+| #51 | Beta-exit proof/validation | 📋 Last — blocked until pre-beta-exit issues cleared |
 
 ---
 
 ## ⚠️ Pre-Beta-Exit Blockers (Milestone #5)
 
-> Beta exit blocked until these are resolved. See `docs/SPINE_STATUS.md` for full explanation.
+> Agent-usability-first ordering (dogfood session 2026-04-09).
 
-| # | Issue | Severity | Status |
+| # | Issue | Priority | Status |
 |---|---|---|---|
-| #57 | MCP TextContent NameError — all tool calls crash | 🔴 Blocker | ✅ Fixed — PR #61 |
-| #58 | README exit code table wrong | 🟡 High | ✅ Fixed — PR #63 |
-| #59 | `drift scan --json` missing | 🟡 Medium | Open |
-| #60 | SPINE_SECURITY_BASELINE.md wrong repo name | 🟡 Medium | Open |
+| #59 | `spine drift scan --json` missing | 🟡 Medium | Open |
+| #64 | `spine evidence list` + `spine decision list` | 🟡 Medium | Open |
+| #65 | `check before-pr --json` structured doctor detail | 🟡 Medium | Open |
+| #66 | `check before-work` no-brief advisory not exit 1 | 🟡 Medium | Open |
+| #60 | SECURITY_BASELINE wrong repo name | 🟡 Medium | Open |
 
 ---
 
@@ -82,4 +85,4 @@ Grouped by target milestone. Each item: title, short description, why it matters
 
 ---
 
-*Last updated: 2026-04-09 — Pre-Beta-Exit blockers identified (milestone #5)*
+*Last updated: 2026-04-09 — Agent-usability-first pre-beta-exit queue*

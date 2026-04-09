@@ -1,6 +1,6 @@
 # SPINE Status
 
-**Last updated:** 2026-04-09 (Issue #66 — before-work no-brief advisory merged, 1 pre-beta-exit blocker remains: #60)
+**Last updated:** 2026-04-09 (Issue #60 — SECURITY_BASELINE wrong repo name fixed on main, pre-beta-exit blockers cleared)
 **Repo:** `Hashi-Ai-Dev/SPINE`
 
 ---
@@ -24,20 +24,20 @@
 | Beta blocker stabilization | ✅ Complete — PR #46 |
 | Beta core feature queue | ✅ Complete |
 | Beta polish queue | ✅ Complete |
-| **Pre-Beta-Exit blockers** | ⚠️ **1 open — beta exit nearly unblocked** |
+| **Pre-Beta-Exit blockers** | ✅ All cleared |
 
 ---
 
-## ⚠️ Beta Exit Blocked
+## ✅ Beta Exit Blockers Cleared
 
-Beta exit is NOT currently justified. 1 pre-beta-exit issue remains.
+All pre-beta-exit blockers are resolved. Beta exit is now unblocked pending #51 proof/validation.
 
-### Pre-Beta-Exit Queue (Milestone #5)
+### Pre-Beta-Exit Queue (Milestone #5) — All Fixed
 
 | Priority | # | Issue | Status |
 |---|---|---|---|
 | 1 | ~~#66~~ | ~~`check before-work` no-brief advisory~~ | ✅ Fixed — PR #70 |
-| 2 | #60 | SECURITY_BASELINE wrong repo name | 🟡 Medium — Open |
+| 2 | ~~#60~~ | ~~SECURITY_BASELINE wrong repo name~~ | ✅ Fixed — commit `9feb2642` |
 
 ### Fixed
 
@@ -49,6 +49,7 @@ Beta exit is NOT currently justified. 1 pre-beta-exit issue remains.
 | ~~#64~~ | ~~`spine evidence list` + `spine decision list`~~ | ✅ Fixed — PR #68 |
 | ~~#65~~ | ~~`check before-pr --json` structured doctor detail~~ | ✅ Fixed — PR #69 |
 | ~~#66~~ | ~~`check before-work` no-brief advisory~~ | ✅ Fixed — PR #70 |
+| ~~#60~~ | ~~SECURITY_BASELINE wrong repo name~~ | ✅ Fixed — commit `9feb2642` |
 
 ---
 
@@ -67,18 +68,19 @@ Beta exit is NOT currently justified. 1 pre-beta-exit issue remains.
 | #64 | `spine evidence list` + `spine decision list` | PR #68 |
 | #65 | `check before-pr --json` structured | PR #69 |
 | #66 | `check before-work` no-brief advisory | PR #70 |
+| #60 | SECURITY_BASELINE wrong repo name | commit `9feb2642` |
 
 ### Beta Polish Queue
 
 | # | Issue | Status |
 |---|---|---|
-| #51 | Beta-exit proof/validation | 📋 Last — blocked until pre-beta-exit issues cleared |
+| #51 | Beta-exit proof/validation | 📋 Last — unblocked now that pre-beta-exit issues cleared |
 
 ---
 
 ## Next Active Priority
 
-**Issue #60** — fix SPINE_SECURITY_BASELINE.md wrong repo name. Last blocker before beta-exit proof.
+**Issue #51** — Beta-exit proof/validation. All pre-beta-exit blockers cleared. This is the final step before beta exit.
 
 ---
 

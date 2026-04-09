@@ -1,6 +1,6 @@
 # SPINE Status
 
-**Last updated:** 2026-04-09 (Issue #64 — in review, PR #68) blockers remain)
+**Last updated:** 2026-04-09 (Issue #64 — evidence list + decision list merged, 3 pre-beta-exit blockers remain)
 **Repo:** `Hashi-Ai-Dev/SPINE`
 
 ---
@@ -32,17 +32,16 @@
 
 Beta exit is NOT currently justified. 3 pre-beta-exit issues remain.
 
-**Agent-usability-first ordering** (from dogfood session): agent-usage issues before docs cleanup.
+**Agent-usability-first ordering.**
 
 ### Pre-Beta-Exit Queue (Milestone #5)
 
 | Priority | # | Issue | Status |
 |---|---|---|---|
-| 1 | ~~#59~~ | ~~`spine drift scan --json` missing~~ | ✅ Fixed — PR #67 |
-| 2 | #64 | `spine evidence list` + `spine decision list` | 🟡 Medium | 📋 In review (PR #68) |
-| 3 | #65 | `check before-pr --json` structured doctor detail | 🟡 Medium — Open |
-| 4 | #66 | `check before-work` no-brief advisory not exit 1 | 🟡 Medium — Open |
-| 5 | #60 | SECURITY_BASELINE wrong repo name | 🟡 Medium — Open |
+| 1 | ~~#64~~ | ~~`spine evidence list` + `spine decision list`~~ | ✅ Fixed — PR #68 |
+| 2 | #65 | `check before-pr --json` structured doctor detail | 🟡 Medium — Open |
+| 3 | #66 | `check before-work` no-brief advisory not exit 1 | 🟡 Medium — Open |
+| 4 | #60 | SECURITY_BASELINE wrong repo name | 🟡 Medium — Open |
 
 ### Fixed
 
@@ -51,6 +50,7 @@ Beta exit is NOT currently justified. 3 pre-beta-exit issues remain.
 | ~~#57~~ | ~~MCP TextContent NameError~~ | ✅ Fixed — PR #61 |
 | ~~#58~~ | ~~README exit code + test count~~ | ✅ Fixed — PR #63 |
 | ~~#59~~ | ~~`spine drift scan --json` missing~~ | ✅ Fixed — PR #67 |
+| ~~#64~~ | ~~`spine evidence list` + `spine decision list`~~ | ✅ Fixed — PR #68 |
 
 ---
 
@@ -66,6 +66,7 @@ Beta exit is NOT currently justified. 3 pre-beta-exit issues remain.
 | #57 | MCP TextContent NameError | PR #61 |
 | #58 | README exit codes + test count | PR #63 |
 | #59 | `spine drift scan --json` | PR #67 |
+| #64 | `spine evidence list` + `spine decision list` | PR #68 |
 
 ### Beta Polish Queue
 

@@ -48,7 +48,7 @@ Grouped by target milestone. Each item: title, short description, why it matters
 | #58 | README exit code + test count | PR #63 |
 | #59 | `spine drift scan --json` | PR #67 |
 | #64 | `spine evidence list` + `spine decision list` | PR #68 |
-| #65 | `check before-pr --json` structured doctor detail | PR pending |
+| #65 | `check before-pr --json` structured doctor detail | PR #69 |
 
 ### Beta Polish Queue
 
@@ -63,9 +63,8 @@ Grouped by target milestone. Each item: title, short description, why it matters
 > Agent-usability-first ordering (dogfood session 2026-04-09).
 
 | # | Issue | Status |
-|---|---|---|
-| ~~#64~~ | ~~`spine evidence list` + `spine decision list`~~ | ✅ Fixed — PR #68 |
-| ~~#65~~ | ~~`check before-pr --json` structured doctor detail~~ | ✅ Fixed — PR pending |
+|---|---|
+| ~~#65~~ | ~~`check before-pr --json` structured doctor detail~~ | ✅ Fixed — PR #69 |
 | #66 | `check before-work` no-brief advisory not exit 1 | 🟡 Medium — Open |
 | #60 | SECURITY_BASELINE wrong repo name | 🟡 Medium — Open |
 

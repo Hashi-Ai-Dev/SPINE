@@ -1,6 +1,6 @@
 # SPINE Status
 
-**Last updated:** 2026-04-09 (Issue #65 — `check before-pr --json` structured doctor detail implemented, 2 pre-beta-exit blockers remain)
+**Last updated:** 2026-04-09 (Issue #65 — check before-pr --json structured merged, 2 pre-beta-exit blockers remain)
 **Repo:** `Hashi-Ai-Dev/SPINE`
 
 ---
@@ -38,10 +38,9 @@ Beta exit is NOT currently justified. 2 pre-beta-exit issues remain.
 
 | Priority | # | Issue | Status |
 |---|---|---|---|
-| 1 | ~~#64~~ | ~~`spine evidence list` + `spine decision list`~~ | ✅ Fixed — PR #68 |
-| 2 | #65 | `check before-pr --json` structured doctor detail | 🟡 Medium | 📋 In review (PR #69) |
-| 3 | #66 | `check before-work` no-brief advisory not exit 1 | 🟡 Medium — Open |
-| 4 | #60 | SECURITY_BASELINE wrong repo name | 🟡 Medium — Open |
+| 1 | ~~#65~~ | ~~`check before-pr --json` structured doctor detail~~ | ✅ Fixed — PR #69 |
+| 2 | #66 | `check before-work` no-brief advisory not exit 1 | 🟡 Medium — Open |
+| 3 | #60 | SECURITY_BASELINE wrong repo name | 🟡 Medium — Open |
 
 ### Fixed
 
@@ -51,7 +50,7 @@ Beta exit is NOT currently justified. 2 pre-beta-exit issues remain.
 | ~~#58~~ | ~~README exit code + test count~~ | ✅ Fixed — PR #63 |
 | ~~#59~~ | ~~`spine drift scan --json` missing~~ | ✅ Fixed — PR #67 |
 | ~~#64~~ | ~~`spine evidence list` + `spine decision list`~~ | ✅ Fixed — PR #68 |
-| ~~#65~~ | ~~`check before-pr --json` structured doctor detail~~ | ✅ Fixed — PR pending |
+| ~~#65~~ | ~~`check before-pr --json` structured doctor detail~~ | ✅ Fixed — PR #69 |
 
 ---
 
@@ -68,7 +67,7 @@ Beta exit is NOT currently justified. 2 pre-beta-exit issues remain.
 | #58 | README exit codes + test count | PR #63 |
 | #59 | `spine drift scan --json` | PR #67 |
 | #64 | `spine evidence list` + `spine decision list` | PR #68 |
-| #65 | `check before-pr --json` structured doctor detail | PR pending |
+| #65 | `check before-pr --json` structured | PR #69 |
 
 ### Beta Polish Queue
 
@@ -80,7 +79,7 @@ Beta exit is NOT currently justified. 2 pre-beta-exit issues remain.
 
 ## Next Active Priority
 
-**Issue #66** — `check before-work` no-brief advisory not exit 1. Agent-usability-first ordering.
+**Issue #66** — `check before-work` no-brief advisory not exit 1. 2 blockers remain.
 
 ---
 
@@ -102,6 +101,7 @@ SPINE is a **repo-native mission governor** for AI coding agents. It sits above 
 - Releases: https://github.com/Hashi-Ai-Dev/SPINE/releases
 - Spec: `docs/SPINE_PHASE3A_v0.2_SPEC.md`
 - Tracking policy: `docs/SPINE_TRACKING_POLICY.md`
+- Agent skill: `docs/SPINE_AGENT_SKILL.md`
 
 ---
 

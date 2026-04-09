@@ -39,7 +39,7 @@ Beta exit is NOT currently justified. 3 pre-beta-exit issues remain.
 | Priority | # | Issue | Status |
 |---|---|---|---|
 | 1 | ~~#59~~ | ~~`spine drift scan --json` missing~~ | ✅ Fixed — PR #67 |
-| 2 | ~~#64~~ | ~~`spine evidence list` + `spine decision list`~~ | ✅ Fixed — branch `beta/usability64-evidence-decision-list` |
+| 2 | #64 | `spine evidence list` + `spine decision list` | 🟡 Medium | 📋 In review (PR #68) |
 | 3 | #65 | `check before-pr --json` structured doctor detail | 🟡 Medium — Open |
 | 4 | #66 | `check before-work` no-brief advisory not exit 1 | 🟡 Medium — Open |
 | 5 | #60 | SECURITY_BASELINE wrong repo name | 🟡 Medium — Open |

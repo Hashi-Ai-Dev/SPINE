@@ -49,7 +49,20 @@ Grouped by target milestone. Each item: title, short description, why it matters
 
 | # | Issue | Status |
 |---|---|---|
-| #51 | Beta-exit proof/validation | 📋 Next — last Beta polish issue |
+| #51 | Beta-exit proof/validation | 📋 Active — last Beta polish issue |
+
+---
+
+## ⚠️ Pre-Beta-Exit Blockers (Milestone #5)
+
+> Beta exit blocked until these are resolved. See `docs/SPINE_STATUS.md` for full explanation.
+
+| # | Issue | Severity | Status |
+|---|---|---|---|
+| #57 | MCP TextContent NameError — all tool calls crash | 🔴 Blocker | Open |
+| #58 | README exit code table wrong | 🟡 High | Open |
+| #59 | `drift scan --json` missing | 🟡 Medium | Open |
+| #60 | SPINE_SECURITY_BASELINE.md wrong repo name | 🟡 Medium | Open |
 
 ---
 
@@ -69,4 +82,4 @@ Grouped by target milestone. Each item: title, short description, why it matters
 
 ---
 
-*Last updated: 2026-04-08 — Issue #50 merged, Beta polish one issue remaining (#51)*
+*Last updated: 2026-04-09 — Pre-Beta-Exit blockers identified (milestone #5)*

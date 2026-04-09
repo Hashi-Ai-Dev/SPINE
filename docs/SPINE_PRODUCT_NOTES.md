@@ -143,6 +143,55 @@ Messy-repo validation → no issue yet — note for Phase 3B candidates
 *One-line takeaway: SPINE's concept is real, but adoption depends on reducing discipline tax enough that governance feels worth the overhead in real, messy agent workflows.*
 
 
+
 ---
+
+## External Agent Adoption Read — Agent Credibility Validation (2026-04-09)
+
+**Source:** External agent evaluation session.
+**Classification:** Internal product guidance — not for public copy.
+
+### Adoption status
+
+SPINE is already credible for **Claude Code CLI** and **Codex** as a governance layer above execution. **OpenClaw** is compatible in principle but not yet first-class in docs/onboarding.
+
+### Trust signals that landed well
+
+- Real CLI, `--cwd` / `SPINE_ROOT`, stable exit behavior, `--json`, local-only operation
+- Agent-readable repo files (`.spine/*.jsonl`)
+- CI + tests as trust signals
+- Drift / check / brief / MCP / review surfaces
+
+### What this validates
+
+- SPINE is past "interesting idea" — it is now a **real agent-governance repo**
+- `brief --target ...` + repo-native agent files are the strongest adoption wedge
+- File-native, inspectable, deterministic governance is landing as intended
+
+### Main hesitations exposed
+
+1. **Repo's own mission quality is too weak** — blank/generic mission reduces trust immediately
+2. **Instruction-surface drift is still dangerous** — stale examples create friction; SPINE must not become a source of agent confusion
+3. **Version-story ambiguity weakens confidence** — README / release / package version should tell one coherent story
+4. **OpenClaw needs a thin first-class startup contract** — skill/onboarding should be explicit, not just "compatible in theory"
+
+### Durability signal
+
+Ephemeral outputs (briefs, reviews) correctly gitignored; durable governance (decisions, evidence, drift) committed. That split improves agent trust materially.
+
+### Strategic direction
+
+Keep: repo-native governance above execution; strongest when drift/coordination/proof ambiguity become expensive.
+Do NOT drift into: orchestration theater, cloud/platform sprawl, "universal agent framework" positioning.
+
+### Follow-up implications (no new issues — fold into existing work)
+
+- Mission quality → relevant to #51 (beta-exit proof)
+- Stale command examples → already addressed via AGENT_SKILL normalization; remain vigilant
+- Version story → note for Phase 3B
+- OpenClaw first-class path → Phase 3B candidate
+
+*One-line takeaway: SPINE is already agent-credible, but trust still depends on operational sharp edges being cleaned up so agents can rely on it instead of merely tolerating it.*
+
 
 *Preserved for Phase 3B / beta planning. Not active work.*

@@ -100,6 +100,84 @@ These insights were classified against SPINE's core identity:
 
 ---
 
+
+
+---
+
+## Pre-Beta-Exit Triage Rule — Internal Policy
+
+**Classification:** Internal governance policy — not for public copy.
+**Applies to:** All SPINE contributors and agents.
+
+### Core Rule
+
+Before beta exit, prioritize only work that materially improves:
+- Trust
+- Agent usability
+- Contract truth
+- Beta-exit proof
+
+Do NOT use "more polish" as a reason to expand scope endlessly.
+
+### Beta-Exit Pass Criteria
+
+SPINE must not exit beta until ALL are true:
+1. 0 known blocker bugs on shipped core surface
+2. 0 known high-severity trust/usability bugs on core agent workflows
+3. Docs, command examples, and actual CLI behavior tell the same truth
+4. SPINE's own repo looks self-governed and credible
+5. Repeated-use proof is strong enough that beta exit is a confirmation step, not a discovery step
+
+### What Must Be Prioritized
+
+**A) Agent trust + usability:**
+- Machine-readable outputs, queryable governance state, first-run ergonomics
+- Readable/queryable evidence + decision surfaces
+- Reliable drift detection for agents/tools
+- Agent-consumable briefs / handoffs / checks
+
+**B) Repo truth:**
+- Stale command examples, docs/CLI mismatches
+- Weak or misleading mission state in SPINE's own repo
+- Version-story ambiguity, public docs that undermine trust
+
+**C) Beta-exit proof:**
+- Repeated governed workflows validated
+- Agent use credible in practice
+- Trust leaks addressed
+- Remaining issues low-risk and explicitly deferred
+
+### Support / Compatibility Rule
+
+Before beta exit, SPINE must remain clearly compatible with and complementary to Claude Code, Codex, oh-my-claudecode, Superpowers, and OpenClaw.
+
+Favor: stable CLI contracts, plain file contracts, deterministic `--json`, local-first usage, brief generation, startup/skill clarity for external agent runtimes.
+
+Do NOT prioritize work that makes SPINE a competing orchestration platform, dashboard-first, cloud-first, dependent on hidden automation, or tightly coupled to only one runtime.
+
+### Triage Decision Rule
+
+Every new issue/finding must be classified as exactly one of:
+
+1. **MUST FIX BEFORE BETA EXIT** — affects agent trust, public contract correctness, repo self-credibility, reproducible workflow reliability, or compatibility for Claude Code/Codex/oh-my-claudecode/Superpowers/OpenClaw
+
+2. **GOOD TO FIX BEFORE BETA EXIT IF CHEAP** — small docs-truth fixes, small ergonomics improvements, version-story cleanup, agent onboarding clarity, small compatibility clarifications
+
+3. **DEFER UNTIL AFTER BETA EXIT** — new platform features, orchestration expansion, dashboards/cloud/remote, speculative abstractions, "nice to have" ideas that do not change trust
+
+### Anti-Sprawl Rule
+
+"Pre-beta-exit polish" does NOT justify issue spam, broad rewrites, architecture drift, new platform ambitions, or "while we're here" expansion. Only fix things that reduce meaningful trust leaks.
+
+### External-Runtime Rule
+
+If a finding improves support for Claude Code, Codex, oh-my-claudecode, Superpowers, or OpenClaw — treat it as strategically important IF it improves SPINE as a governance layer ABOVE those tools. Do NOT chase parity with those tools' orchestration features. Do NOT turn SPINE into their replacement.
+
+### One-Line Operating Principle
+
+Before beta exit, fix every meaningful trust leak for agents and operators — especially across Claude Code, Codex, oh-my-claudecode, Superpowers, and OpenClaw — and defer everything else.
+
+
 ## External Agent Feedback — Pre-Beta-Exit Validation (2026-04-09)
 
 **Source:** External coding-agent evaluation session.

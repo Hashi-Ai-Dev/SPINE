@@ -49,7 +49,6 @@ Grouped by target milestone. Each item: title, short description, why it matters
 | #59 | `spine drift scan --json` | PR #67 |
 | #64 | `spine evidence list` + `spine decision list` | PR #68 |
 | #65 | `check before-pr --json` structured doctor detail | PR #69 |
-| #66 | `check before-work` no-brief advisory not exit 1 | branch `beta/usability66-before-work-advisory` |
 
 ### Beta Polish Queue
 
@@ -66,7 +65,7 @@ Grouped by target milestone. Each item: title, short description, why it matters
 | # | Issue | Status |
 |---|---|
 | ~~#65~~ | ~~`check before-pr --json` structured doctor detail~~ | ✅ Fixed — PR #69 |
-| ~~#66~~ | ~~`check before-work` no-brief advisory not exit 1~~ | ✅ Fixed — branch `beta/usability66-before-work-advisory` |
+| ~~#66~~ | ~~`check before-work` no-brief advisory not exit 1~~ | ✅ Fixed — PR #70 |
 | #60 | SECURITY_BASELINE wrong repo name | 🟡 Medium — Open |
 
 ---
@@ -87,4 +86,4 @@ Grouped by target milestone. Each item: title, short description, why it matters
 
 ---
 
-*Last updated: 2026-04-09 — 1 pre-beta-exit blocker remains (#60)*
+*Last updated: 2026-04-09 — 2 pre-beta-exit blockers remain (#66, #60)*

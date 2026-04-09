@@ -100,4 +100,49 @@ These insights were classified against SPINE's core identity:
 
 ---
 
+## External Agent Feedback — Pre-Beta-Exit Validation (2026-04-09)
+
+**Source:** External coding-agent evaluation session.
+**Classification:** Internal product guidance — not for public copy.
+
+### What landed as real value
+- Repo-native `.spine/` governance state
+- `brief --target claude` — agent-consumable governance context (strongest product wedge)
+- Git-native `drift scan` — explicit scope drift detection
+- Proof/decision logging — auditable trail
+
+### What remains the biggest risk
+Discipline tax: repeated manual `decision add` / `evidence add` feels like overhead.
+May not sustain without sufficient payoff in real, messy agent workflows.
+
+### Correct positioning
+NOT "every solo dev should use this."
+
+SPINE earns its keep when:
+- Drift, coordination failure, and proof ambiguity become expensive
+- AI-heavy or multi-agent workflows are running
+- Long-running projects where context decays
+
+### What SPINE is NOT
+Do NOT overreact into dashboards, cloud, remote platform creep, or hidden automation theater.
+These erode the explicit/local/repo-native model that makes SPINE trustworthy.
+
+### Beta-exit standards
+Before calling beta ready, validate:
+- First-run and session-start ergonomics feel low-friction
+- Docs truth: nothing misleading about command scope or behavior
+- Discipline tax is reduced, not just documented
+- Governance feels worth the overhead in real, messy agent workflows
+
+### Fold into existing work
+Discipline-tax reduction → Beta polish queue (#51 beta-exit proof)
+First-run ergonomics → consider in #50 before-work checkpoint refinement
+Docs truth → #59, #60
+Messy-repo validation → no issue yet — note for Phase 3B candidates
+
+*One-line takeaway: SPINE's concept is real, but adoption depends on reducing discipline tax enough that governance feels worth the overhead in real, messy agent workflows.*
+
+
+---
+
 *Preserved for Phase 3B / beta planning. Not active work.*

@@ -1,6 +1,6 @@
 # SPINE Status
 
-**Last updated:** 2026-04-09 (Issue #66 — check before-work no-brief advisory, 1 pre-beta-exit blocker remains)
+**Last updated:** 2026-04-09 (Issue #66 — before-work no-brief advisory merged, 1 pre-beta-exit blocker remains: #60)
 **Repo:** `Hashi-Ai-Dev/SPINE`
 
 ---
@@ -24,7 +24,7 @@
 | Beta blocker stabilization | ✅ Complete — PR #46 |
 | Beta core feature queue | ✅ Complete |
 | Beta polish queue | ✅ Complete |
-| **Pre-Beta-Exit blockers** | ⚠️ **1 open — beta exit blocked** |
+| **Pre-Beta-Exit blockers** | ⚠️ **1 open — beta exit nearly unblocked** |
 
 ---
 
@@ -32,15 +32,12 @@
 
 Beta exit is NOT currently justified. 1 pre-beta-exit issue remains.
 
-**Agent-usability-first ordering.**
-
 ### Pre-Beta-Exit Queue (Milestone #5)
 
 | Priority | # | Issue | Status |
 |---|---|---|---|
-| 1 | ~~#65~~ | ~~`check before-pr --json` structured doctor detail~~ | ✅ Fixed — PR #69 |
-| 2 | ~~#66~~ | ~~`check before-work` no-brief advisory not exit 1~~ | ✅ Fixed — branch `beta/usability66-before-work-advisory` |
-| 3 | #60 | SECURITY_BASELINE wrong repo name | 🟡 Medium — Open |
+| 1 | ~~#66~~ | ~~`check before-work` no-brief advisory~~ | ✅ Fixed — PR #70 |
+| 2 | #60 | SECURITY_BASELINE wrong repo name | 🟡 Medium — Open |
 
 ### Fixed
 
@@ -51,7 +48,7 @@ Beta exit is NOT currently justified. 1 pre-beta-exit issue remains.
 | ~~#59~~ | ~~`spine drift scan --json` missing~~ | ✅ Fixed — PR #67 |
 | ~~#64~~ | ~~`spine evidence list` + `spine decision list`~~ | ✅ Fixed — PR #68 |
 | ~~#65~~ | ~~`check before-pr --json` structured doctor detail~~ | ✅ Fixed — PR #69 |
-| ~~#66~~ | ~~`check before-work` no-brief advisory not exit 1~~ | ✅ Fixed — branch `beta/usability66-before-work-advisory` |
+| ~~#66~~ | ~~`check before-work` no-brief advisory~~ | ✅ Fixed — PR #70 |
 
 ---
 
@@ -69,6 +66,7 @@ Beta exit is NOT currently justified. 1 pre-beta-exit issue remains.
 | #59 | `spine drift scan --json` | PR #67 |
 | #64 | `spine evidence list` + `spine decision list` | PR #68 |
 | #65 | `check before-pr --json` structured | PR #69 |
+| #66 | `check before-work` no-brief advisory | PR #70 |
 
 ### Beta Polish Queue
 
@@ -80,7 +78,7 @@ Beta exit is NOT currently justified. 1 pre-beta-exit issue remains.
 
 ## Next Active Priority
 
-**Issue #66** — `check before-work` no-brief advisory not exit 1. 2 blockers remain.
+**Issue #60** — fix SPINE_SECURITY_BASELINE.md wrong repo name. Last blocker before beta-exit proof.
 
 ---
 

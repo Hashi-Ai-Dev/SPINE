@@ -1,7 +1,7 @@
 # SPINE Security Baseline — Public Alpha
 
 **Date:** 2026-04-07
-**Applies to:** `Hashi-Ai-Dev/HASHI.AI-Spine`
+**Applies to:** `Hashi-Ai-Dev/SPINE`
 
 ---
 
@@ -30,12 +30,12 @@ Establish minimal public-alpha security posture: open source ready, no obvious s
 
 ### ⚠️ Dependabot
 - **Status:** Cannot confirm via API on free tier
-- **Recommendation:** Visit `https://github.com/Hashi-Ai-Dev/HASHI.AI-Spine/settings/security_and_analysis` when logged in as repo owner and enable Dependabot alerts
+- **Recommendation:** Visit `https://github.com/Hashi-Ai-Dev/SPINE/settings/security_and_analysis` when logged in as repo owner and enable Dependabot alerts
 
 ### ⚠️ Secret Scanning
 - **Status:** Cannot confirm via API on free tier (requires GitHub Pro for private repos; becomes available when repo is public)
 - **Note:** Repo is now **public** — secret scanning should be active by default
-- **Verify:** `https://github.com/Hashi-Ai-Dev/HASHI.AI-Spine/settings/security_and_analysis`
+- **Verify:** `https://github.com/Hashi-Ai-Dev/SPINE/settings/security_and_analysis`
 
 ### ⚠️ Secret Scanning Push Protection
 - Similar to above — enable at the same settings page
@@ -46,14 +46,14 @@ Establish minimal public-alpha security posture: open source ready, no obvious s
 
 - GitHub PAT stored in `TOOLS.md` in the spine-repo-manager workspace
 - `TOOLS.md` is gitignored and never committed to any git repo
-- Token was used only for API calls to `Hashi-Ai-Dev/HASHI.AI-Spine`
+- Token was used only for API calls to `Hashi-Ai-Dev/SPINE`
 - Token will be rotated by owner every couple of days per their statement
 
 ---
 
 ## Settings Checklist (Owner Action Recommended)
 
-Visit: `https://github.com/Hashi-Ai-Dev/HASHI.AI-Spine/settings/security_and_analysis`
+Visit: `https://github.com/Hashi-Ai-Dev/SPINE/settings/security_and_analysis`
 
 | Setting | Recommended |
 |---------|-------------|

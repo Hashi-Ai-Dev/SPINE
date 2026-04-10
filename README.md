@@ -205,7 +205,7 @@ SPINE has exited beta. Phase 3A is complete:
 - Artifact ergonomics contract (machine-readable manifest, canonical naming)
 - External-repo onboarding docs ([`docs/external-repo-onboarding.md`](docs/external-repo-onboarding.md))
 
-Beta work focuses on reducing discipline tax and making governance mechanics more executable for agents and tools. See [`docs/ROADMAP.md`](docs/ROADMAP.md) for the beta direction.
+Post-beta focus: stability and bug fixes only until v0.2.0 stabilizes. Phase 3B candidates deferred. See [`docs/ROADMAP.md`](docs/ROADMAP.md) for the current milestone structure.
 
 Not planned: web UI, auth, billing, cloud sync, remote MCP, or multi-user support.
 

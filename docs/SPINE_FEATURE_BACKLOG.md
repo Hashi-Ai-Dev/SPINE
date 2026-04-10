@@ -26,7 +26,7 @@ Grouped by target milestone. Each item: title, short description, why it matters
 
 ## Beta — v0.2.0-beta
 
-> ✅ Beta core and polish complete. Beta-exit blockers remain.
+> ✅ Beta core and polish complete. **Beta exit achieved** (2026-04-09).
 
 ### Completed Beta Issues
 
@@ -49,24 +49,22 @@ Grouped by target milestone. Each item: title, short description, why it matters
 | #59 | `spine drift scan --json` | PR #67 |
 | #64 | `spine evidence list` + `spine decision list` | PR #68 |
 | #65 | `check before-pr --json` structured doctor detail | PR #69 |
-
-### Beta Polish Queue
-
-| # | Issue | Status |
-|---|---|---|
-| #51 | Beta-exit proof/validation | ✅ Harness + artifact landed on branch `beta/issue51-beta-exit-proof-validation`. See [`SPINE_BETA_EXIT_VALIDATION.md`](SPINE_BETA_EXIT_VALIDATION.md). |
+| #66 | `check before-work` no-brief advisory | PR #70 |
+| #60 | SECURITY_BASELINE wrong repo name | commit `9feb2642` |
+| #51 | Beta-exit proof/validation | PR #72 |
 
 ---
 
-## ⚠️ Pre-Beta-Exit Blockers (Milestone #5)
-
-> Agent-usability-first ordering (dogfood session 2026-04-09).
+## ✅ Pre-Beta-Exit Blockers — All Cleared (Milestone #5)
 
 | # | Issue | Status |
 |---|---|
 | ~~#65~~ | ~~`check before-pr --json` structured doctor detail~~ | ✅ Fixed — PR #69 |
 | ~~#66~~ | ~~`check before-work` no-brief advisory not exit 1~~ | ✅ Fixed — PR #70 |
 | ~~#60~~ | ~~SECURITY_BASELINE wrong repo name~~ | ✅ Fixed — commit `9feb2642` |
+| ~~#51~~ | ~~Beta-exit proof/validation~~ | ✅ Fixed — PR #72 |
+
+Beta exit gate is open. See `docs/SPINE_BETA_EXIT_VALIDATION.md` for the full evidence-backed judgment.
 
 ---
 
@@ -86,4 +84,4 @@ Grouped by target milestone. Each item: title, short description, why it matters
 
 ---
 
-*Last updated: 2026-04-09 — Issue #51 (beta-exit proof/validation) closed out on branch `beta/issue51-beta-exit-proof-validation`. Harness PASS. Beta-exit recommendation pending operator review of one mission-fields caveat.*
+*Last updated: 2026-04-09 — Beta exit achieved. All pre-beta-exit issues closed. Beta tag can be cut.*

@@ -8,7 +8,7 @@
 
 [![Python 3.12+](https://img.shields.io/badge/python-3.12%2B-blue.svg)](https://www.python.org/)
 [![uv](https://img.shields.io/badge/built%20with-uv-blueviolet)](https://github.com/astral-sh/uv)
-[![beta](https://img.shields.io/badge/status-beta-blue.svg)]()
+[![v0.2.0](https://img.shields.io/badge/version-v0.2.0-brightgreen.svg)]()
 [![Stars](https://img.shields.io/github/stars/Hashi-Ai-Dev/SPINE?style=flat&logo=github)]()
 [![Forks](https://img.shields.io/github/forks/Hashi-Ai-Dev/SPINE?style=flat&logo=github)]()
 
@@ -209,9 +209,9 @@ Beta work focuses on reducing discipline tax and making governance mechanics mor
 
 Not planned: web UI, auth, billing, cloud sync, remote MCP, or multi-user support.
 
-## Beta Status
+## Post-Beta Status
 
-This is a **beta release** (`v0.2.0-beta`). The core command surface is stable and validated. Breaking changes are possible before v1. Do not use in production without review.
+SPINE has exited beta. The core command surface is stable and validated. Bug fixes only until v0.2.0 stabilizes.
 
 ---
 

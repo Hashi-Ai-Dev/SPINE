@@ -1,6 +1,6 @@
 # SPINE Status
 
-**Last updated:** 2026-04-09 (Issue #51 — beta-exit proof + validation artifact merged; beta exit achieved; PR #72)
+**Last updated:** 2026-04-10 (Beta exit housekeeping complete; mission.yaml populated; v1.0 milestone created)
 **Repo:** `Hashi-Ai-Dev/SPINE`
 
 ---
@@ -10,8 +10,8 @@
 | | |
 |---|---|
 | **Version** | `v0.2.0-beta` |
-| **Status** | Pre-release — beta exit gate cleared |
-| **Target** | Beta exit imminent |
+| **Status** | Beta exit achieved — ready for formal v0.2.0 tag |
+| **Target** | v0.2.0 |
 
 ---
 
@@ -24,38 +24,42 @@
 | Beta blocker stabilization | ✅ Complete — PR #46 |
 | Beta core feature queue | ✅ Complete |
 | Beta polish queue | ✅ Complete |
-| **Pre-Beta-Exit blockers** | ✅ All cleared — Beta exit gate open |
+| **Beta exit** | ✅ Achieved (2026-04-09) |
+| **Next** | v0.2.0 tag + post-beta stabilization |
 
 ---
 
-## ✅ Beta Exit Achieved
+## ✅ Beta Exit — All Closed
 
-All pre-beta-exit issues resolved. Beta exit validation passed. Beta tag can now be cut.
+Beta exit gate cleared. All pre-beta-exit issues resolved.
 
-### Pre-Beta-Exit Queue (Milestone #5) — All Closed
-
-| # | Issue | Status |
+| # | Issue | PR |
 |---|---|
-| #57 | MCP TextContent NameError | ✅ Fixed — PR #61 |
-| #58 | README exit code + test count | ✅ Fixed — PR #63 |
-| #59 | `spine drift scan --json` missing | ✅ Fixed — PR #67 |
-| #64 | `spine evidence list` + `spine decision list` | ✅ Fixed — PR #68 |
-| #65 | `check before-pr --json` structured doctor detail | ✅ Fixed — PR #69 |
-| #66 | `check before-work` no-brief advisory | ✅ Fixed — PR #70 |
-| #60 | SECURITY_BASELINE wrong repo name | ✅ Fixed — commit `9feb2642` |
-| #51 | Beta-exit proof/validation | ✅ Fixed — PR #72 |
+| #57 | MCP TextContent NameError | PR #61 |
+| #58 | README exit code + test count | PR #63 |
+| #59 | `spine drift scan --json` | PR #67 |
+| #64 | `spine evidence list` + `spine decision list` | PR #68 |
+| #65 | `check before-pr --json` structured doctor detail | PR #69 |
+| #66 | `check before-work` no-brief advisory | PR #70 |
+| #60 | SECURITY_BASELINE wrong repo name | commit `9feb2642` |
+| #51 | Beta-exit proof/validation | PR #72 |
 
 ### Beta Exit Validation
 
 See `docs/SPINE_BETA_EXIT_VALIDATION.md` for the full evidence-backed judgment.
 
+### Post-Beta Housekeeping (2026-04-10)
+- `.spine/mission.yaml` populated with real self-governance values (commit `c0cf5d3c`) — beta-exit caveat resolved
+- `docs/SPINE_ROADMAP.md` updated for post-beta state
+- `milestone/6` created: "v1.0 — Post-Beta Stabilization"
+
 ---
 
 ## Current Milestone
 
-**`Beta Exit`** — v0.2.0-beta → v0.2.0
+**`v0.2.0`** — Post-beta release
 
-Beta exit gate cleared. Re-validation artifact at `docs/SPINE_BETA_EXIT_VALIDATION.md`. Harness at `scripts/beta_exit_validation/`.
+Next: operator cuts the v0.2.0 tag. See `docs/SPINE_ROADMAP.md`.
 
 ---
 
@@ -79,6 +83,7 @@ SPINE is a **repo-native mission governor** for AI coding agents. It sits above 
 - Tracking policy: `docs/SPINE_TRACKING_POLICY.md`
 - Agent skill: `docs/SPINE_AGENT_SKILL.md`
 - Beta-exit validation: `docs/SPINE_BETA_EXIT_VALIDATION.md`
+- Roadmap: `docs/SPINE_ROADMAP.md`
 
 ---
 

@@ -166,7 +166,7 @@ Validated against two repos before the v0.2.0-beta release:
 
 ## Known Limitations
 
-This is beta software. Known rough edges:
+Post-beta stability. Known limitations:
 
 1. `SPINE_ROOT` is process-global — if set in a shell profile, all commands are affected. Use `--cwd` per-command to target a specific repo.
 2. No migration tooling yet — this is the first public release.
@@ -190,13 +190,13 @@ This is beta software. Known rough edges:
 - [`docs/SPINE_INTEGRATIONS.md`](docs/SPINE_INTEGRATIONS.md) — compatibility and integration guide for Claude Code, oh-my-claudecode, and Superpowers
 - [`docs/SPINE_OFFICIAL_SPEC_v0.1.md`](docs/SPINE_OFFICIAL_SPEC_v0.1.md) — authoritative design spec
 - [`docs/SPINE_FEATURE_BACKLOG.md`](docs/SPINE_FEATURE_BACKLOG.md) — current and planned features
-- [`docs/ROADMAP.md`](docs/ROADMAP.md) — public product roadmap (alpha → beta → v1.0.0)
+- [`docs/ROADMAP.md`](docs/ROADMAP.md) — public product roadmap (stable releases, Phase 3B deferred)
 
 See [`docs/README.md`](docs/README.md) for the full documentation index.
 
 ## What's Next
 
-SPINE is now in **beta** (`v0.2.0-beta`). Phase 3A is complete:
+SPINE has exited beta. Phase 3A is complete:
 
 - Explicit repo targeting contract + `--cwd` precedence normalization
 - Repo/branch context visibility + deterministic default branch resolution

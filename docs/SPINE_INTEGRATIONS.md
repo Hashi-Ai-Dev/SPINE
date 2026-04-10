@@ -335,4 +335,4 @@ SPINE connects to the execution layer through `.spine/briefs/`, `CLAUDE.md`, `AG
 ---
 
 *See [`external-repo-onboarding.md`](external-repo-onboarding.md) for the full quickstart guide.*  
-*See [`SPINE_OFFICIAL_SPEC_v0.1.md`](SPINE_OFFICIAL_SPEC_v0.1.md) for the authoritative command reference.*
+*See [`SPINE_SPEC.md`](SPINE_SPEC.md) for the authoritative command reference.*

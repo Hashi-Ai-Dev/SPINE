@@ -79,7 +79,8 @@ SPINE is a **repo-native mission governor** for AI coding agents. It sits above 
 
 - Repo: https://github.com/Hashi-Ai-Dev/SPINE
 - Releases: https://github.com/Hashi-Ai-Dev/SPINE/releases
-- Spec: `docs/SPINE_PHASE3A_v0.2_SPEC.md`
+- Spec: `docs/SPINE_SPEC.md` (canonical post-beta)
+- Phase 3A planning history: `docs/SPINE_PHASE3A_v0.2_SPEC.md` (complete/historical)
 - Tracking policy: `docs/SPINE_TRACKING_POLICY.md`
 - Agent skill: `docs/SPINE_AGENT_SKILL.md`
 - Beta-exit validation: `docs/SPINE_BETA_EXIT_VALIDATION.md`

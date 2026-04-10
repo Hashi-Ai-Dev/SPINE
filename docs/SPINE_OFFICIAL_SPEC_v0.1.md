@@ -1,5 +1,7 @@
 # SPINE Official Specification v0.1
 
+> **HISTORICAL ARCHIVE — 2026-04-10:** This document is the v0.1 foundation spec. It is preserved as historical context and is **not** the current canonical spec. The current canonical spec is [`docs/SPINE_SPEC.md`](SPINE_SPEC.md).
+
 > **Status note (2026-04-07):** SPINE is in public alpha. v0.1.1-alpha was published and v0.1.2 stabilization is complete. Phase 1 and Phase 2 are both complete historical phases. The next planned phase is v0.2 / Phase 3A (Portability + operator polish). See `docs/SPINE_PHASE3A_v0.2_SPEC.md`.
 
 ## What SPINE Is

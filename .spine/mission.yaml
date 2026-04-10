@@ -1,6 +1,6 @@
 version: 1
 id: mission-0001
-title: SPINE: Repo-Native Mission Governor for AI Agents
+title: "SPINE: Repo-Native Mission Governor for AI Agents"
 status: active
 target_user: Developers and operators running AI coding agents (Claude Code, Codex, OpenClaw, and similar)
 user_problem: AI agents lose context, drift from stated goals, and accumulate undocumented decisions without explicit governance structures

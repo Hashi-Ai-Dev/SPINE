@@ -9,7 +9,7 @@
 
 | | |
 |---|---|
-| **Version** | `v0.2.0` |
+| **Version** | `v0.2.1` |
 | **Status** | Post-beta — stable |
 | **Target** | v1.0 — Post-Beta Stabilization |
 
@@ -26,7 +26,8 @@
 | Beta polish queue | ✅ Complete |
 | **Beta exit** | ✅ Achieved (2026-04-09) |
 | **v0.2.0** | ✅ Released (2026-04-10) |
-| **v1.0 — Post-Beta Stabilization** | ✅ Complete — milestone #6 |
+| **v1.0 — Post-Beta Stabilization** | ✅ Complete — milestone #6
+| **v0.2.1** | Released (2026-04-14) — post-beta stabilization |
 
 ---
 

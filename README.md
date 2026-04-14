@@ -167,7 +167,7 @@ Commands that require a git repo fail fast with a clear message when the resolve
 
 ## Validation
 
-Validated against two repos before the v0.2.0-beta release:
+Validated end-to-end before v0.2.1 (2026-04-14): two repos, full governance loop:
 
 - **Self-governance:** Full governance loop on SPINE's own repo — evidence logged, decisions recorded, drift scanned, weekly review and agent briefs generated. As of v0.2.1 (2026-04-14): **600+ passing** (27 test files, CI active on every push and PR).
 - **External repo (gsn-connector):** `--cwd` and `SPINE_ROOT` targeting verified end-to-end across all commands. Drift scan correctly read the external repo's git history. No state pollution between repos.
@@ -199,6 +199,7 @@ Post-beta stability. Known limitations:
 - [`docs/SPINE_OFFICIAL_SPEC_v0.1.md`](docs/SPINE_OFFICIAL_SPEC_v0.1.md) — authoritative design spec
 - [`docs/SPINE_FEATURE_BACKLOG.md`](docs/SPINE_FEATURE_BACKLOG.md) — current and planned features
 - [`docs/ROADMAP.md`](docs/ROADMAP.md) — public product roadmap (stable releases, Phase 3B deferred)
+- [Release Notes](https://github.com/Hashi-Ai-Dev/SPINE/releases) — changelog for all versions
 
 See [`docs/README.md`](docs/README.md) for the full documentation index.
 
@@ -210,15 +211,13 @@ Phase 3B candidates (remote MCP, webhooks, web UI) are deferred. See [docs/SPINE
 
 Not planned: web UI, auth, billing, cloud sync, or multi-user support.
 
-## Post-Beta Status
-
-SPINE has exited beta. The core command surface is stable and validated. Bug fixes only until v0.2.0 stabilizes.
-
 ---
+
+If SPINE saves you time, ★ this repo to show support — [github.com/Hashi-Ai-Dev/SPINE](https://github.com/Hashi-Ai-Dev/SPINE)
 
 ## Authors
 
-- **HASHI.AI** — SPINE Agent / Repo Manager
-- **Hashi** — Project Lead
+- [**HASHI.AI**](https://github.com/Hashi-Ai-Dev) — SPINE Agent / Repo Manager
+- [**Hashi**](https://github.com/LucielAI) — Project Lead
 
 *SPINE is built and maintained by the HASHI.AI agent system.*

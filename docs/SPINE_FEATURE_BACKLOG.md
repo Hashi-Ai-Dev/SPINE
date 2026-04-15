@@ -95,6 +95,15 @@ Beta exit gate is open. See `docs/SPINE_BETA_EXIT_VALIDATION.md` for the full ev
 **Stage:** Building
 
 | # | Issue | Status |
+### CLAWNAV Real-Usage Feedback (2026-04-15)
+
+| # | Issue | Status |
+|---|---|
+| #86 | Decision query interface — `spine query` for semantic search | 🟡 Open — v1.0.0 |
+| #87 | `spine brief` output doesn't match what agents actually use in practice | 🟡 Open — v1.0.0 |
+| #88 | Lightweight shell helper for agents that cannot assume `spine` is in $PATH | 🟡 Open — v1.0.0 |
+
+
 |---|---|
 | #82 | External/sandboxed agent bootstrap path (parent) | 🟡 Open |
 | #83 | Explicit `uv run spine` bootstrap path for external agents | 🟡 Open — #82 sub-issue |
@@ -112,4 +121,4 @@ Beta exit gate is open. See `docs/SPINE_BETA_EXIT_VALIDATION.md` for the full ev
 
 ---
 
-*Last updated: 2026-04-15 — v0.2.1 released. Promo cleanup via PR #81. v1.0.0 milestone open (#82, #83, #84, #85).*
+*Last updated: 2026-04-15 — v0.2.1 released. Promo cleanup via PR #81. v1.0.0 milestone open (#82-#88). CL AWNAV real-usage feedback captured.*

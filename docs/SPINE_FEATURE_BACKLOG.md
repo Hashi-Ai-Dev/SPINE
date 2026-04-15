@@ -89,7 +89,19 @@ Beta exit gate is open. See `docs/SPINE_BETA_EXIT_VALIDATION.md` for the full ev
 ### 🟡 Discipline-tax reduction (#74)
 **Status:** Active — Phase 3B candidate
 
-### 🚫 HUD / live observability mode
+#
+## v1.0.0 — Stable Release
+
+**Stage:** Building
+
+| # | Issue | Status |
+|---|---|
+| #82 | External/sandboxed agent bootstrap path (parent) | 🟡 Open |
+| #83 | Explicit `uv run spine` bootstrap path for external agents | 🟡 Open — #82 sub-issue |
+| #84 | Clear `--cwd` targeting semantics to prevent init from wrong repo | 🟡 Open — #82 sub-issue |
+| #85 | Structured file-mode fallback when CLI unavailable | 🟡 Open — #82 sub-issue |
+
+## 🚫 HUD / live observability mode
 **Status:** REJECTED
 
 ### 🚫 Notification / webhook systems
@@ -100,4 +112,4 @@ Beta exit gate is open. See `docs/SPINE_BETA_EXIT_VALIDATION.md` for the full ev
 
 ---
 
-*Last updated: 2026-04-14 — v0.2.0 released. Milestone #6 complete. All post-beta stabilization issues resolved.*
+*Last updated: 2026-04-15 — v0.2.1 released. Promo cleanup via PR #81. v1.0.0 milestone open (#82, #83, #84, #85).*

@@ -2,8 +2,17 @@
 
 from __future__ import annotations
 
+import importlib.metadata
+
+def _get_version() -> str:
+    try:
+        return importlib.metadata.version("spine")
+    except importlib.metadata.PackageNotFoundError:
+        return "0.2.1"  # fallback for dev installs not yet in pyproject.toml
+
+SPINE_VERSION: str = _get_version()
+
 SPINE_DIR = ".spine"
-SPINE_VERSION = "0.1"
 
 # --- YAML state files ---
 MISSION_FILE = "mission.yaml"

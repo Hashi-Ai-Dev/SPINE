@@ -1,7 +1,16 @@
----
-name: spine-agent
-description: Use SPINE governance commands inside any repo with a .spine/ directory. Triggers when: working in a SPINE-governed repo and need to record decisions, evidence, drift, or mission context; a brief or review is needed; a governance checkpoint (before-pr, before-work) is relevant. Also use when: adding a decision or evidence record, checking governance health (doctor), generating a brief for agent context, or running a drift scan. Do NOT trigger for general coding tasks unrelated to governance.
----
+"""
+SPINE Agent Skill — governance commands for AI coding agents.
+
+Triggers when: working in a SPINE-governed repo and need to record decisions,
+evidence, drift, or mission context; a brief or review is needed; a governance
+checkpoint (before-pr, before-work) is relevant.
+
+Also use when: adding a decision or evidence record, checking governance health
+(doctor), generating a brief for agent context, running a drift scan, or verifying
+which repo SPINE is targeting.
+
+Do NOT trigger for general coding tasks unrelated to governance.
+"""
 
 # SPINE Agent Skill
 
@@ -29,9 +38,8 @@ export SPINE_ROOT=/path/to/repo
 SPINE_ROOT=/path/to/repo spine doctor
 
 # Verify what SPINE is currently targeting
-# Note: spine target command is planned — see docs/SPINE_FEATURE_BACKLOG.md #73
-# uv run spine target
-# uv run spine target --json
+uv run spine target          # human-readable
+uv run spine target --json   # machine-readable
 ```
 
 ## When to Use This Skill
@@ -54,7 +62,13 @@ uv run spine doctor
 uv run spine mission show
 
 # 3. If no mission exists, ask the operator to run:
-uv run spine mission set --title "..." --goal "..."
+uv run spine mission set \
+  --title "..." \
+  --target-user "..." \
+  --user-problem "..." \
+  --promise "..." \
+  --metric-type milestone \
+  --metric-value "..."
 ```
 
 ## Standard Working Loop

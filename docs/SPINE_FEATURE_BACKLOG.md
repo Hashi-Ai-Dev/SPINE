@@ -110,6 +110,64 @@ Beta exit gate is open. See `docs/SPINE_BETA_EXIT_VALIDATION.md` for the full ev
 | #84 | Clear `--cwd` targeting semantics to prevent init from wrong repo | 🟡 Open — #82 sub-issue |
 | #85 | Structured file-mode fallback when CLI unavailable | 🟡 Open — #82 sub-issue |
 
+
+## v0.2.2 — Truth Sync + Code Hygiene
+
+**Stage:** Planned
+
+| # | Issue | Status |
+|---|---|
+| #89 | [release] v0.2.2 — Truth Sync + Code Hygiene | 🟡 Open |
+| #90 | Fix SPINE_VERSION constant (0.1 → 0.2.1) | 🟡 Open |
+| #91 | Fix SPINE_AGENT_SKILL.md — invalid commands, stale spine target | 🟡 Open |
+| #92 | Fix README command table — OpenClaw support | 🟡 Open |
+| #93 | Fix SPINE_STATUS.md — #75 contradiction | 🟡 Open |
+| #94 | Verify DRIFT_SEVERITY import (Luciel claim → unconfirmed) | 🟡 Open |
+| #95 | BriefService refactor + DriftService path hygiene | 🟡 Open |
+
+## v0.2.3 — Agent Context Export + Strict Checks
+
+**Stage:** Planned
+
+| # | Issue | Status |
+|---|---|
+| #96 | [release] v0.2.3 — Agent Context Export + Strict Checks | 🟡 Open |
+| #97 | spine context export — injectable context for spawned agents | 🟡 Open |
+| #98 | spine check --strict mode — block work when prerequisites unmet | 🟡 Open |
+| #99 | SPINE_REPO_MANAGER_RUNBOOK.md | 🟡 Open |
+
+## v0.2.4 — Identity + Mission Ensure + Query
+
+**Stage:** Planned
+
+| # | Issue | Status |
+|---|---|
+| #100 | [release] v0.2.4 — Identity + Mission Ensure + Query | 🟡 Open |
+| #101 | spine identity verify | 🟡 Open |
+| #102 | spine mission ensure | 🟡 Open |
+| #86 | spine query — semantic search (existing) | 🟡 Open |
+
+## v0.2.5 — OpenClaw Adoption Pack
+
+**Stage:** Planned
+
+| # | Issue | Status |
+|---|---|
+| #103 | [release] v0.2.5 — OpenClaw Adoption Pack | 🟡 Open |
+| #104 | SPINE_OPENCLAW_ADOPTION.md | 🟡 Open |
+| #105 | OpenClaw brief improvements | 🟡 Open |
+| #88 | Lightweight shell helper (existing) | 🟡 Open |
+
+## v0.3.0 — Drift Lifecycle + Mission-Aware Drift
+
+**Stage:** Planned
+
+| # | Issue | Status |
+|---|---|
+| #106 | [release] v0.3.0 — Drift Lifecycle + Mission-Aware Drift | 🟡 Open |
+| #107 | spine drift resolve + Drift IDs | 🟡 Open |
+| #108 | Mission-derived drift patterns | 🟡 Open |
+
 ## 🚫 HUD / live observability mode
 **Status:** REJECTED
 
@@ -121,4 +179,4 @@ Beta exit gate is open. See `docs/SPINE_BETA_EXIT_VALIDATION.md` for the full ev
 
 ---
 
-*Last updated: 2026-04-15 — v0.2.1 released. Promo cleanup via PR #81. v1.0.0 milestone open (#82-#88). CL AWNAV real-usage feedback captured.*
+*Last updated: 2026-04-28 — v0.2.2-v0.3.0 roadmap issues created. Full release plan approved by Hashi.*
